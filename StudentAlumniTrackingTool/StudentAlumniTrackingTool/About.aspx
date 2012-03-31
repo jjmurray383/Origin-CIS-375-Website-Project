@@ -8,6 +8,15 @@
         About
     </h2>
     <p>
-        Put content here.
-    </p>
+        Created by:</p>
+    <p>
+                John Murray</p>
+    <p>
+                Stefan Arambasich</p>
+    <p>
+                Nikki Najorka</p>
+    <p>
+                Mike Lane</p>
+    <p>
+                Kyle Ward</p>
 </asp:Content>
