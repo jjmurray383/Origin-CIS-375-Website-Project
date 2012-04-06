@@ -5,13 +5,9 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
-        Welcome to ASP.NET!
-    </h2>
+        Welcome to ALUMNI SOCIAL TRACKER!</h2>
     <p>
-        To learn more about ASP.NET visit <a href="http://www.asp.net" title="ASP.NET Website">www.asp.net</a>.
-    </p>
-    <p>
-        You can also find <a href="http://go.microsoft.com/fwlink/?LinkID=152368&amp;clcid=0x409"
-            title="MSDN ASP.NET Docs">documentation on ASP.NET at MSDN</a>.
+        Thanks for visiting Alumni Social Tracker!&nbsp; This is an implementation of a 
+        student-alumni tracking tool. To use the system, please login or rgister first.
     </p>
 </asp:Content>

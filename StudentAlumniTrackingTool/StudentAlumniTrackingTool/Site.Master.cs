@@ -13,5 +13,12 @@ namespace StudentAlumniTrackingTool
         {
 
         }
+
+        protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            if (e.CommandName.Equals("About")) {
+
+            }
+        }
     }
 }

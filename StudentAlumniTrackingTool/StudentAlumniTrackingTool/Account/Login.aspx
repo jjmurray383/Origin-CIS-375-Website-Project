@@ -22,7 +22,7 @@
                 <fieldset class="login">
                     <legend>Account Information</legend>
                     <p>
-                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
+                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Email Address:</asp:Label>
                         <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
                              CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
