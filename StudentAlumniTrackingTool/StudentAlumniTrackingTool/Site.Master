@@ -29,6 +29,8 @@
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
+            <asp:LoginView ID = "MenuLoginView" runat = "server" EnableViewState = "false">
+            <AnonymousTemplate>
                 <asp:Menu ID="DefaultNavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                     onmenuitemclick="NavigationMenu_MenuItemClick">
@@ -37,8 +39,8 @@
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                     </Items>
                 </asp:Menu>
-            </div>
-             <div class="clear hideSkiplink">
+                </AnonymousTemplate>
+                <LoggedInTemplate>
                 <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                     onmenuitemclick="NavigationMenu_MenuItemClick">
@@ -50,6 +52,8 @@
                         <asp:MenuItem NavigateUrl="~/Logout.aspx" Text="Logout"/>
                     </Items>
                 </asp:Menu>
+                </LoggedInTemplate>
+            </asp:LoginView>
             </div>
         </div>
         <div class="main">
