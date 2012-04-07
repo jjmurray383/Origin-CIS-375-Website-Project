@@ -33,22 +33,7 @@
                 <RoleGroups>
                     <asp:RoleGroup Roles = "user">
                         <ContentTemplate>
-                            <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
-                            EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
-                            onmenuitemclick="NavigationMenu_MenuItemClick">
-                            <Items>
-                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
-                                <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
-                                <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
-                            </Items>
-                             </asp:Menu>
-                        </ContentTemplate>
-                    </asp:RoleGroup>
-                </RoleGroups>
-            <LoggedInTemplate>
-                      <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
+                            <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
                             EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                             onmenuitemclick="NavigationMenu_MenuItemClick">
                             <Items>
@@ -60,7 +45,22 @@
                                 <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
                             </Items>
-                             </asp:Menu>   
+                             </asp:Menu> 
+                        </ContentTemplate>
+                    </asp:RoleGroup>
+                </RoleGroups>
+            <LoggedInTemplate>
+                <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
+                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
+                    onmenuitemclick="NavigationMenu_MenuItemClick">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
+                        <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
+                    </Items>
+                        </asp:Menu>
             </LoggedInTemplate>
             <AnonymousTemplate>
                 <asp:Menu ID="DefaultNavigationMenu" runat="server" CssClass="menu" 
