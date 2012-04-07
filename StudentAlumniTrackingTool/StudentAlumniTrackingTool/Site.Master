@@ -46,9 +46,9 @@
                              </asp:Menu>
                         </ContentTemplate>
                     </asp:RoleGroup>
-                    <asp:RoleGroup Roles = "admin">
-                         <ContentTemplate>
-                            <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
+                </RoleGroups>
+            <LoggedInTemplate>
+                      <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
                             EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                             onmenuitemclick="NavigationMenu_MenuItemClick">
                             <Items>
@@ -60,10 +60,8 @@
                                 <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
                             </Items>
-                             </asp:Menu>
-                        </ContentTemplate>
-                    </asp:RoleGroup>
-                </RoleGroups>
+                             </asp:Menu>   
+            </LoggedInTemplate>
             <AnonymousTemplate>
                 <asp:Menu ID="DefaultNavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 

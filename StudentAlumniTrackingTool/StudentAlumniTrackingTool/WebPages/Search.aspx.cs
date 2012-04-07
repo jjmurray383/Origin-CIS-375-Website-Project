@@ -50,7 +50,6 @@ namespace StudentAlumniTrackingTool.WebPages
             TextBox EmployerHistoryEmailBox = (TextBox)FindControl("EmployerHistoryEmailBox");
 
             // Query the DB
-            SqlConnection dbConn = new SqlConnection();
             SqlCommand sqlComm = new SqlCommand();
 
             int emptyCount = 0;
@@ -211,8 +210,8 @@ namespace StudentAlumniTrackingTool.WebPages
                     EntryError.Text = "You did not specify any criteria. You cannot run an empty search";
                     EntryError.Visible = true;
                 } else {
-                    // Generate search query here as a session variable
-                    string sqlQuery = "SELECT ";
+                    string sqlQuery = sqlComm.ToString();
+                    // Generate search query here as a session variable - will be passed to results page
                     Session["SearchQuery"] = sqlQuery;
                 }
 
@@ -221,7 +220,6 @@ namespace StudentAlumniTrackingTool.WebPages
             }
             finally {
                 // Close DB connection and queries
-                dbConn.Close();
                 sqlComm.Dispose();
             }
         } 

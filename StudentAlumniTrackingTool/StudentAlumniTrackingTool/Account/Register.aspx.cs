@@ -52,7 +52,7 @@ namespace StudentAlumniTrackingTool.Account
 
             // First verify that this user is unique; do this by finding the email and checking against DB
             TextBox EmailTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Email");
-            string connectionString;
+            string connectionString = "";
             SqlConnection DBConn = new SqlConnection(connectionString);
             SqlCommand DBCmd = new SqlCommand();
             SqlCommand sqlComm = new SqlCommand();
@@ -86,14 +86,13 @@ namespace StudentAlumniTrackingTool.Account
             {
                 // Add SQL statement to insert into database
                 DBCmd = new SqlCommand(
-                    "INSERT INTO userprofile(UID, Email, Fname, Lname)" +
-                    "VALUES (@UID, @Email, @Fname, @Lname)", DBConn);
+                    "INSERT ");
 
                 // Add database parameters
-                DBCmd.Parameters.Add("@UID", MySqlDbType.Int32).Value = newUserId;
-                DBCmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = EmailTextBox.Text;
-                DBCmd.Parameters.Add("@Fname", MySqlDbType.VarChar).Value = FirstNameTextBox.Text;
-                DBCmd.Parameters.Add("@Lname", MySqlDbType.VarChar).Value = LastNameTextBox.Text;
+                // DBCmd.Parameters.Add("@UID", System.Data.SqlDbType.Int).Value = newUserId;
+                DBCmd.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                DBCmd.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar).Value = FirstNameTextBox.Text;
+                DBCmd.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = LastNameTextBox.Text;
                 DBCmd.ExecuteNonQuery();
             }
 
