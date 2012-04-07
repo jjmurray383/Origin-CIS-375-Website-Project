@@ -14,7 +14,14 @@ namespace StudentAlumniTrackingTool.WebPages
         {
             int count = 0;
             if (Session["SearchQuery"] == null)
+            {
                 NoResultsPanel.Visible = true;
+                ResultsPanel.Visible = false;
+            }
+            else
+            {
+                ResultsPanel.Visible = true;
+            }
         }
 
         protected void ResultsGridView_SelectedIndexChanged(object sender, EventArgs e)
