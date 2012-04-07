@@ -4,7 +4,8 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
+    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser"
+     ContinueDestinationPageUrl="Success.aspx" RequireEmail="true">
         <LayoutTemplate>
             <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
             <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
@@ -30,7 +31,14 @@
                         <fieldset class="register">
                             <legend>Login Information</legend>
                             <p>
-                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">E-mail:</asp:Label>
+                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Username">E-mail:</asp:Label>
+                                <asp:TextBox ID="Username" runat="server" CssClass="textEntry"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="UsernameRequired" runat="server" ControlToValidate="Username" 
+                                     CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
+                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                            </p>
+                            <p>
+                                <asp:Label ID="EmailLabel2" runat="server" AssociatedControlID="Email">E-mail (repeat):</asp:Label>
                                 <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
                                      CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
@@ -62,7 +70,7 @@
                                      ToolTip="You must enter a first name." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p> 
                             <p>
-                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial:</asp:Label>
+                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial: </asp:Label>
                                 <asp:TextBox ID="MiddleInitialBox" runat="server" CssClass="textEntry" TextMode="SingleLine" Width="30" MaxLength="1"></asp:TextBox>
                                 
                             </p>
@@ -318,41 +326,14 @@
                                 </asp:DropDownList>
                             </p>
                             <p>
-                                <asp:Label ID="GraduationDate" runat="server" AssociatedControlID="GraduationDay">Graduation Date:</asp:Label>
-                                <asp:DropDownList ID = "GraduationDay" runat = "server">
-                                    <asp:ListItem Value="01">1</asp:ListItem>
-                                    <asp:ListItem Value="02">2</asp:ListItem>
-                                    <asp:ListItem Value="03">3</asp:ListItem>
-                                    <asp:ListItem Value="04">4</asp:ListItem>
-                                    <asp:ListItem Value="05">5</asp:ListItem>
-                                    <asp:ListItem Value="06">6</asp:ListItem>
-                                    <asp:ListItem Value="07">7</asp:ListItem>
-                                    <asp:ListItem Value="08">8</asp:ListItem>
-                                    <asp:ListItem Value="09">9</asp:ListItem>
-                                    <asp:ListItem Value="10">10</asp:ListItem>
-                                    <asp:ListItem Value="11">11</asp:ListItem>
-                                    <asp:ListItem Value="12">12</asp:ListItem>
-                                    <asp:ListItem Value="13">13</asp:ListItem>
-                                    <asp:ListItem Value="14">14</asp:ListItem>
-                                    <asp:ListItem Value="15">15</asp:ListItem>
-                                    <asp:ListItem Value="16">16</asp:ListItem>
-                                    <asp:ListItem Value="17">17</asp:ListItem>
-                                    <asp:ListItem Value="18">18</asp:ListItem>
-                                    <asp:ListItem Value="19">19</asp:ListItem>
-                                    <asp:ListItem Value="20">20</asp:ListItem>
-                                    <asp:ListItem Value="21">21</asp:ListItem>
-                                    <asp:ListItem Value="22">22</asp:ListItem>
-                                    <asp:ListItem Value="23">23</asp:ListItem>
-                                    <asp:ListItem Value="24">24</asp:ListItem>
-                                    <asp:ListItem Value="25">25</asp:ListItem>
-                                    <asp:ListItem Value="26">26</asp:ListItem>
-                                    <asp:ListItem Value="27">27</asp:ListItem>
-                                    <asp:ListItem Value="28">28</asp:ListItem>
-                                    <asp:ListItem Value="29">29</asp:ListItem>
-                                    <asp:ListItem Value="30">30</asp:ListItem>
-                                    <asp:ListItem Value="31">31</asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:Label ID="GPALabel" runat="server" AssociatedControlID="GPABox">GPA:</asp:Label>
+                                <asp:TextBox ID = "GPABox" runat = "server" MaxLength = "10"> </asp:TextBox>
+                                <asp:RegularExpressionValidator ID = "GPAValidator" ControlToValidate = "GPABox" ValidationExpression = "\d{0,10}.?\d{0,10}"
+                                ErrorMessage = "Invalid GPA." runat="server">Format: 0.000 (4 point scale)</asp:RegularExpressionValidator> 
+                            </p>
+                                <asp:Label ID="GraduationDate" runat="server" AssociatedControlID="GraduationMonth">Graduation Date:</asp:Label>
                                 <asp:DropDownList ID = "GraduationMonth" runat = "server">
+                                    <asp:ListItem Value="Current">--</asp:ListItem>
                                     <asp:ListItem Value="January">January</asp:ListItem>
                                     <asp:ListItem Value="February">February</asp:ListItem>
                                     <asp:ListItem Value="March">March</asp:ListItem>
@@ -366,7 +347,9 @@
                                     <asp:ListItem Value="November">November</asp:ListItem>
                                     <asp:ListItem Value="December">December</asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:DropDownList ID = "GradYearDropdown" runat = "server"></asp:DropDownList>
+                                <asp:DropDownList ID = "GradYearDropdown" runat = "server">
+                                    <asp:ListItem Value = "9999">--</asp:ListItem>
+                                </asp:DropDownList>
                             </p>
                              <p>
                                 <asp:Label ID="UnviersityEmailLabel" runat="server" AssociatedControlID="UnviersityEmailBox">School Email:</asp:Label>
@@ -382,8 +365,8 @@
                                 <asp:TextBox ID = "EmployeeTitleBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
                             <p>
-                                <asp:Label ID="ScheduleLabel" runat="server" AssociatedControlID="ScheduleInput">Schedule:</asp:Label>
-                                <asp:TextBox ID = "TextBox1" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
+                                <asp:Label ID="ScheduleLabel" runat="server" AssociatedControlID="ScheduleBox">Schedule:</asp:Label>
+                                <asp:TextBox ID = "ScheduleBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
                             <p>
                                 <asp:Label ID="EmployerContactInfoLabel" runat="server" AssociatedControlID="EmployerContactInfoBox">Contact Info:</asp:Label>

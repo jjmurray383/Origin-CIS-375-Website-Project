@@ -30,29 +30,51 @@
             </div>
             <div class="clear hideSkiplink">
             <asp:LoginView ID = "MenuLoginView" runat = "server" EnableViewState = "false">
+                <RoleGroups>
+                    <asp:RoleGroup Roles = "user">
+                        <ContentTemplate>
+                            <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
+                            EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
+                            onmenuitemclick="NavigationMenu_MenuItemClick">
+                            <Items>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
+                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
+                                <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
+                            </Items>
+                             </asp:Menu>
+                        </ContentTemplate>
+                    </asp:RoleGroup>
+                    <asp:RoleGroup Roles = "admin">
+                         <ContentTemplate>
+                            <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
+                            EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
+                            onmenuitemclick="NavigationMenu_MenuItemClick">
+                            <Items>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
+                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
+                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Edit/Delete"/>
+                                <asp:MenuItem NavigateUrl="~/WebPages/DeleteAll.aspx" Text="Delete All"/>
+                                <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
+                            </Items>
+                             </asp:Menu>
+                        </ContentTemplate>
+                    </asp:RoleGroup>
+                </RoleGroups>
             <AnonymousTemplate>
                 <asp:Menu ID="DefaultNavigationMenu" runat="server" CssClass="menu" 
                     EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                     onmenuitemclick="NavigationMenu_MenuItemClick">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                     </Items>
                 </asp:Menu>
                 </AnonymousTemplate>
-                <LoggedInTemplate>
-                <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
-                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
-                    onmenuitemclick="NavigationMenu_MenuItemClick">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/WebPages/RegisterUser.aspx" Text="Add/Register"/>
-                        <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
-                        <asp:MenuItem NavigateUrl="~/Logout.aspx" Text="Logout"/>
-                    </Items>
-                </asp:Menu>
-                </LoggedInTemplate>
             </asp:LoginView>
             </div>
         </div>

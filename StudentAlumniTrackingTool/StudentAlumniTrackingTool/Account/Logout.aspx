@@ -1,5 +1,5 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Logout.aspx.cs" Inherits="StudentAlumniTrackingTool.Account.Login" %>
+﻿<%@ Page Title="Log Out" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+    CodeBehind="Logout.aspx.cs" Inherits="StudentAlumniTrackingTool.Account.Logout" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>

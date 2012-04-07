@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Data.Sql;
 
 namespace StudentAlumniTrackingTool.Account
 {
@@ -19,11 +20,16 @@ namespace StudentAlumniTrackingTool.Account
             if (!IsPostBack)
             {
                 int year = System.DateTime.Now.Year;
+                year += 10; // Add for current students who don't graduate this year but in the next few coming years.
+                DropDownList GradYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("GradYearDropdown");
+                DropDownList EmployerStartYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerStartDateDDYear");
+                DropDownList EmployerEndYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerEndDateYear");
                 for (int i = 1900; i <= year; i++)
                 {
-                    GradYearDropdown.Items.Add(i.ToString);
-                    EmployerStartDateDDYear.Items.Add(i.ToString);
-                    EmployerEndDateYear.Items.Add(i.ToString);
+                    ListItem yearItem = new ListItem(i.ToString());
+                    GradYear.Items.Add(yearItem);
+                    EmployerStartYear.Items.Add(yearItem);
+                    EmployerEndYear.Items.Add(yearItem);
                 }
             }
         }
@@ -44,27 +50,42 @@ namespace StudentAlumniTrackingTool.Account
             }
             Response.Redirect(continueUrl);
 
-            // First verify that this user is unique
+            // First verify that this user is unique; do this by finding the email and checking against DB
             TextBox EmailTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Email");
-
-            // Test if this is a unique DB entry
-            Console.WriteLine(EmailTextBox.Text);
-            SqlConnection dbConn = new SqlConnection();
+            string connectionString;
+            SqlConnection DBConn = new SqlConnection(connectionString);
+            SqlCommand DBCmd = new SqlCommand();
             SqlCommand sqlComm = new SqlCommand();
+
+            try
+            {
+                // Add SQL statement to insert into database
+                DBCmd = new SqlCommand(
+                    "INSERT INTO userprofile(UID, Email, Fname, Lname)" +
+                    "VALUES (@UID, @Email, @Fname, @Lname)", DBConn);
+
+                // Add database parameters
+                // DBCmd.Parameters.Add("@UID", System.Data.SqlDbType.Int).Value = newUserId;
+                DBCmd.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                DBCmd.ExecuteNonQuery();
+            }
+
+            catch (Exception exp)
+            {
+                Response.Write(exp);
+            }
 
             // Retrieve all the values from the registration form to insert into database
             TextBox FirstNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("FirstName");
             TextBox LastNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastName");
             TextBox UsernameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("UserName");
-            /*TextBox EmailTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Email");
 
-            MySqlConnection DBConn = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString);
-            MySqlCommand DBCmd = new MySqlCommand();
+            
 
             try
             {
-                // Add Insert statement to insert into database
-                DBCmd = new MySqlCommand(
+                // Add SQL statement to insert into database
+                DBCmd = new SqlCommand(
                     "INSERT INTO userprofile(UID, Email, Fname, Lname)" +
                     "VALUES (@UID, @Email, @Fname, @Lname)", DBConn);
 
@@ -86,7 +107,7 @@ namespace StudentAlumniTrackingTool.Account
             DBConn.Close();
             DBConn = null;
 
-            Response.Redirect(continueUrl); */
+            Response.Redirect(continueUrl);
 
         }
     }
