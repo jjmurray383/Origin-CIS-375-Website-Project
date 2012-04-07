@@ -8,6 +8,6 @@
         Welcome to ALUMNI SOCIAL TRACKER!</h2>
     <p>
         Thanks for visiting Alumni Social Tracker!&nbsp; This is an implementation of a 
-        student-alumni tracking tool. To use the system, please login or rgister first.
+        student-alumni tracking tool. To use the system, please login or register first.
     </p>
 </asp:Content>
