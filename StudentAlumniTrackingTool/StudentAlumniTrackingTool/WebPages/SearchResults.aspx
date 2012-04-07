@@ -33,8 +33,10 @@
                                 </Columns>
                             </asp:GridView>
 
-                            <asp:SqlDataSource ID = "SqlDataSource1" runat = "server" ConnectionString = "<%$ ConnectionStrings:ConnectionString %>" 
-                                SelectCommand = "<%= Session["SearchQuery"]  %>">
+                            <asp:SqlDataSource ID = "SqlDataSource1" 
+                            runat = "server" 
+                            ConnectionString = "" 
+                            SelectCommand=">">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID = " " Name = "FirstName" PropertyName = "Text" Type = "String" />
 
