@@ -16,7 +16,9 @@
                                     <asp:BoundField DataField = "LastName" HeaderText = "Last Name" SortExpression = "LastName" />
                                     <asp:TemplateField HeaderText = "First Name">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID = "LinkName" runat = "server"></asp:LinkButton>
+                                            <asp:LinkButton ID = "LinkName" runat = "server" 
+                                            Text='<%# Eval("Email") %>'
+                                            PostBackUrl = '<%"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
@@ -35,8 +37,7 @@
 
                             <asp:SqlDataSource ID = "SqlDataSource1" 
                             runat = "server" 
-                            ConnectionString = "" 
-                            SelectCommand=">">
+                            SelectCommand="SELECT FROM WHERE">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID = " " Name = "FirstName" PropertyName = "Text" Type = "String" />
 

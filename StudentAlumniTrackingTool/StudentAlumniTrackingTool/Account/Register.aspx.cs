@@ -61,7 +61,7 @@ namespace StudentAlumniTrackingTool.Account
             {
                 // Add SQL statement to insert into database
                 DBCmd = new SqlCommand(
-                    "INSERT INTO userprofile(UID, Email, Fname, Lname)" +
+                    "INSERT INTO STUDENT(Email, Fname, Lname)" +
                     "VALUES (@UID, @Email, @Fname, @Lname)", DBConn);
 
                 // Add database parameters
