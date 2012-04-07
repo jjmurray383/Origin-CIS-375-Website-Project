@@ -10,7 +10,7 @@
 namespace StudentAlumniTrackingTool.WebPages {
     
     
-    public partial class Search {
+    public partial class Edit {
         
         /// <summary>
         /// ErrorMessage control.
@@ -254,33 +254,6 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList MinorDropdown;
-        
-        /// <summary>
-        /// GPALabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label GPALabel;
-        
-        /// <summary>
-        /// GPABox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox GPABox;
-        
-        /// <summary>
-        /// GPAValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator GPAValidator;
         
         /// <summary>
         /// GraduationDate control.
@@ -551,14 +524,5 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SearchButton;
-        
-        /// <summary>
-        /// EntryError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal EntryError;
     }
 }

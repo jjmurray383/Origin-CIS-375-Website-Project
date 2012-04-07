@@ -1,77 +1,31 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Register.aspx.cs" Inherits="StudentAlumniTrackingTool.Account.Register" %>
-
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="StudentAlumniTrackingTool.WebPages.Edit" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
-        <LayoutTemplate>
-            <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
-            <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
-        </LayoutTemplate>
-        <WizardSteps>
-            <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
-                <ContentTemplate>
-                    <h2>
-                        Create a New Account
-                    </h2>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        <h1>Search</h1>
                     <p>
-                        Use the form below to create a new account.
-                    </p>
-                    <p>
-                        Passwords are required to be a minimum of <%= Membership.MinRequiredPasswordLength %> characters in length.
-                    </p>
+                        Use the form below to search for people.
+                        Please enter data for at least one form.</p>
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
                     </span>
                     <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
                          ValidationGroup="RegisterUserValidationGroup"/>
                     <div class="accountInfo">
-                        <fieldset class="register">
-                            <legend>Login Information</legend>
-                            <p>
-                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">E-mail:</asp:Label>
-                                <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
-                                     CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
-                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                            </p>
-                            <p>
-                                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
-                                <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
-                                     CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
-                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                            </p>
-                            <p>
-                                <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword">Confirm Password:</asp:Label>
-                                <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" CssClass="failureNotification" Display="Dynamic" 
-                                     ErrorMessage="Confirm Password is required." ID="ConfirmPasswordRequired" runat="server" 
-                                     ToolTip="Confirm Password is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="PasswordCompare" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword" 
-                                     CssClass="failureNotification" Display="Dynamic" ErrorMessage="The Password and Confirmation Password must match."
-                                     ValidationGroup="RegisterUserValidationGroup">*</asp:CompareValidator>
-                            </p>
+                        <fieldset class="search">
                             <legend>Profile Information</legend>
                             <p>
                                 <asp:Label ID="FirstNameLabel" runat="server" AssociatedControlID="FirstNameBox">First Name:</asp:Label>
                                 <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="20"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="FirstNameBox" CssClass="failureNotification" Display="Dynamic" 
-                                     ErrorMessage="You must enter a first name." ID="FirstNameRequired" runat="server" 
-                                     ToolTip="You must enter a first name." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p> 
                             <p>
-                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial: </asp:Label>
+                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial:</asp:Label>
                                 <asp:TextBox ID="MiddleInitialBox" runat="server" CssClass="textEntry" TextMode="SingleLine" Width="30" MaxLength="1"></asp:TextBox>
                                 
                             </p>
                             <p>
                                 <asp:Label ID="LastNameLabel" runat="server" AssociatedControlID="LastNameBox">Last Name:</asp:Label>
                                 <asp:TextBox ID="LastNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="25"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="LastNameBox" CssClass="failureNotification" Display="Dynamic" 
-                                     ErrorMessage="You must enter a last name." ID="LastNameRequired" runat="server" 
-                                     ToolTip="You must enter a last name." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                             <p>
                                 <asp:Label ID="PhoneNumLabel" runat="server" AssociatedControlID="PhoneNumBox">Phone Number:</asp:Label>
@@ -151,11 +105,8 @@
                             </p>
                             <strong>Education Info</strong>
                             <p>
-                                <asp:Label ID="UniversityLabel" runat="server" AssociatedControlID="UniversityTextBox">College/University Name:</asp:Label>
-                                <asp:TextBox ID="UniversityTextBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="UniversityTextBox" CssClass="failureNotification" Display="Dynamic" 
-                                     ErrorMessage="At least one school you've attended is required." ID="EducationRequired" runat="server" 
-                                     ToolTip="At least one education is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                <asp:Label ID="UniversityLabel" runat="server" AssociatedControlID="UniversityBox">College/University Name:</asp:Label>
+                                <asp:TextBox ID="UniversityBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
                              <p>
                                 <asp:Label ID="DegreeDropdownLabel" runat="server" AssociatedControlID="DegreeDropdown">Degree Level:</asp:Label>
@@ -318,11 +269,6 @@
                                 </asp:DropDownList>
                             </p>
                             <p>
-                                <asp:Label ID="GPALabel" runat="server" AssociatedControlID="GPABox">GPA:</asp:Label>
-                                <asp:TextBox ID = "GPABox" runat = "server" MaxLength = "10"> </asp:TextBox>
-                                <asp:RegularExpressionValidator ID = "GPAValidator" ControlToValidate = "GPABox" ValidationExpression = "\d{0,10}.?\d{0,10}"
-                                ErrorMessage = "Invalid GPA." runat="server">Format: 0.000 (4 point scale)</asp:RegularExpressionValidator> 
-                            </p>
                                 <asp:Label ID="GraduationDate" runat="server" AssociatedControlID="GraduationMonth">Graduation Date:</asp:Label>
                                 <asp:DropDownList ID = "GraduationMonth" runat = "server">
                                     <asp:ListItem Value="Current">--</asp:ListItem>
@@ -493,22 +439,8 @@
                             </p>
                         </fieldset>
                         <p class="submitButton">
-                            <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 
-                                 ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="SearchButton" runat="server" Text="Search" 
+                                 ValidationGroup="RegisterUserValidationGroup" onclick="OnSearchClick" />
                         </p>
                     </div>
-                </ContentTemplate>
-                <CustomNavigationTemplate>
-                </CustomNavigationTemplate>
-            </asp:CreateUserWizardStep>
-            <asp:WizardStep ID="VerifyUser" runat="server">
-                
-            </asp:WizardStep>
-            <asp:CompleteWizardStep runat = "server">
-                <ContentTemplate>
-                    <h2>Account Created!</h2>
-                </ContentTemplate>
-            </asp:CompleteWizardStep>
-        </WizardSteps>
-    </asp:CreateUserWizard>
 </asp:Content>

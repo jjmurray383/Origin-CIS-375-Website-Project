@@ -10,6 +10,6 @@
 namespace StudentAlumniTrackingTool.Account {
     
     
-    public partial class Login {
+    public partial class Logout {
     }
 }

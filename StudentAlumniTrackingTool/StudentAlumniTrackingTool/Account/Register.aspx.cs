@@ -19,11 +19,15 @@ namespace StudentAlumniTrackingTool.Account
             if (!IsPostBack)
             {
                 int year = System.DateTime.Now.Year;
+                DropDownList GradYear = (DropDownList)FindControl("GradYearDropdown");
+                DropDownList EmployerStartYear = (DropDownList)FindControl("EmployerStartDateDDYear");
+                DropDownList EmployerEndYear = (DropDownList)FindControl("EmployerEndDateYear");
                 for (int i = 1900; i <= year; i++)
                 {
-                    GradYearDropdown.Items.Add(i.ToString);
-                    EmployerStartDateDDYear.Items.Add(i.ToString);
-                    EmployerEndDateYear.Items.Add(i.ToString);
+                    ListItem yearItem = new ListItem(i.ToString());
+                    GradYear.Items.Add(yearItem);
+                    EmployerStartYear.Items.Add(yearItem);
+                    EmployerEndYear.Items.Add(yearItem);
                 }
             }
         }
