@@ -13,14 +13,17 @@ namespace StudentAlumniTrackingTool.WebPages
         protected void Page_Load(object sender, EventArgs e)
         {
             int count = 0;
-            if (Session["SearchQuery"] == null)
+            string queryString = Request.ServerVariables["SearchQuery"];
+            if (queryString == null)
             {
                 NoResultsPanel.Visible = true;
                 ResultsPanel.Visible = false;
             }
             else
             {
+                
                 ResultsPanel.Visible = true;
+                SqlDataSource1.ConnectionString = null; 
             }
         }
 

@@ -99,6 +99,7 @@
                             <p>
                                 <asp:Label ID="StateDropdownLabel" runat="server" AssociatedControlID="StateDropdown">State:</asp:Label>
                                 <asp:DropDownList ID="StateDropdown" runat="server" CssClass="textEntry">
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                     <asp:ListItem Value="AL">Alabama</asp:ListItem>
 	                                <asp:ListItem Value="AK">Alaska</asp:ListItem>
 	                                <asp:ListItem Value="AZ">Arizona</asp:ListItem>

@@ -11,7 +11,11 @@ namespace StudentAlumniTrackingTool.WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Find user email from URL/query string and insert it into profile heading
+            String email;
+            email = Request.QueryString.ToString();
+            Label label = (Label) Page.FindControl("TitleName");
+            label.Text = email;
         }
     }
 }
