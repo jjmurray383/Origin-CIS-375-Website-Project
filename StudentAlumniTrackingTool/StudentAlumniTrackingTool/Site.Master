@@ -38,7 +38,7 @@
                             onmenuitemclick="NavigationMenu_MenuItemClick">
                             <Items>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/RegisterUser.aspx" Text="Add/Register"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
                                 <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
@@ -53,7 +53,7 @@
                             onmenuitemclick="NavigationMenu_MenuItemClick">
                             <Items>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/RegisterUser.aspx" Text="Add/Register"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Edit/Delete"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/DeleteAll.aspx" Text="Delete All"/>
@@ -70,7 +70,7 @@
                     onmenuitemclick="NavigationMenu_MenuItemClick">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/WebPages/RegisterUser.aspx" Text="Add/Register"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                     </Items>
                 </asp:Menu>

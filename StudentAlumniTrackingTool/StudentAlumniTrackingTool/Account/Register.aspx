@@ -4,7 +4,8 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
+    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser"
+     ContinueDestinationPageUrl="Success.aspx" RequireEmail="true">
         <LayoutTemplate>
             <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
             <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
@@ -30,7 +31,14 @@
                         <fieldset class="register">
                             <legend>Login Information</legend>
                             <p>
-                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">E-mail:</asp:Label>
+                                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Username">E-mail:</asp:Label>
+                                <asp:TextBox ID="Username" runat="server" CssClass="textEntry"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="UsernameRequired" runat="server" ControlToValidate="Username" 
+                                     CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
+                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                            </p>
+                            <p>
+                                <asp:Label ID="EmailLabel2" runat="server" AssociatedControlID="Email">E-mail (repeat):</asp:Label>
                                 <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
                                      CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
