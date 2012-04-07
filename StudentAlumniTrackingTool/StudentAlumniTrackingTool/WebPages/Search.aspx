@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Search" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
  CodeBehind="Search.aspx.cs" Inherits="StudentAlumniTrackingTool.WebPages.Search" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -449,8 +449,8 @@
                             </p>
                         </fieldset>
 
-                        <asp:Button ID="SearchButton" runat="server" Text="Search" 
-                                 ValidationGroup="SearchUserValidationGroup" onclick="OnSearchClick" />
+                        <asp:Button ID="SearchButton" runat="server" Text="Search" ValidationGroup="SearchUserValidationGroup"
+                        OnClientClick="OnSearchClick" PostBackUrl="SearchResults.aspx" />
                                  <span class = "failureNotification" >
                                      <asp:Literal ID = "EntryError" Visible="false" runat = "server"></asp:Literal>
                                  </span>
