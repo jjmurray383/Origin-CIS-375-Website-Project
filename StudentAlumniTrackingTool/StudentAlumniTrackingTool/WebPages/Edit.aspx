@@ -2,30 +2,38 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-        <h1>Search</h1>
+    <h2>
+                        Edit Your Account
+                    </h2>
                     <p>
-                        Use the form below to search for people.
-                        Please enter data for at least one form.</p>
+                        Use the form below to edit your account.
+                    </p>
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
                     </span>
-                    <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
-                         ValidationGroup="RegisterUserValidationGroup"/>
+                    <asp:ValidationSummary ID="EditUserValidationSummary" runat="server" CssClass="failureNotification" 
+                         ValidationGroup="EditUserValidationGroup"/>
                     <div class="accountInfo">
-                        <fieldset class="search">
+                        <fieldset class="register">
                             <legend>Profile Information</legend>
                             <p>
                                 <asp:Label ID="FirstNameLabel" runat="server" AssociatedControlID="FirstNameBox">First Name:</asp:Label>
                                 <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="20"></asp:TextBox>
+                                <asp:RequiredFieldValidator ControlToValidate="FirstNameBox" CssClass="failureNotification" Display="Dynamic" 
+                                     ErrorMessage="You must enter a first name." ID="FirstNameRequired" runat="server" 
+                                     ToolTip="You must enter a first name." ValidationGroup="EditUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p> 
                             <p>
-                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial:</asp:Label>
+                                <asp:Label ID="MiddleInitialLabel" runat="server" AssociatedControlID="MiddleInitialBox">Middle Initial: </asp:Label>
                                 <asp:TextBox ID="MiddleInitialBox" runat="server" CssClass="textEntry" TextMode="SingleLine" Width="30" MaxLength="1"></asp:TextBox>
                                 
                             </p>
                             <p>
                                 <asp:Label ID="LastNameLabel" runat="server" AssociatedControlID="LastNameBox">Last Name:</asp:Label>
                                 <asp:TextBox ID="LastNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="25"></asp:TextBox>
+                                <asp:RequiredFieldValidator ControlToValidate="LastNameBox" CssClass="failureNotification" Display="Dynamic" 
+                                     ErrorMessage="You must enter a last name." ID="LastNameRequired" runat="server" 
+                                     ToolTip="You must enter a last name." ValidationGroup="EditUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                             <p>
                                 <asp:Label ID="PhoneNumLabel" runat="server" AssociatedControlID="PhoneNumBox">Phone Number:</asp:Label>
@@ -45,6 +53,7 @@
                             <p>
                                 <asp:Label ID="StateDropdownLabel" runat="server" AssociatedControlID="StateDropdown">State:</asp:Label>
                                 <asp:DropDownList ID="StateDropdown" runat="server" CssClass="textEntry">
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                     <asp:ListItem Value="AL">Alabama</asp:ListItem>
 	                                <asp:ListItem Value="AK">Alaska</asp:ListItem>
 	                                <asp:ListItem Value="AZ">Arizona</asp:ListItem>
@@ -105,8 +114,11 @@
                             </p>
                             <strong>Education Info</strong>
                             <p>
-                                <asp:Label ID="UniversityLabel" runat="server" AssociatedControlID="UniversityBox">College/University Name:</asp:Label>
-                                <asp:TextBox ID="UniversityBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox>
+                                <asp:Label ID="UniversityLabel" runat="server" AssociatedControlID="UniversityTextBox">College/University Name:</asp:Label>
+                                <asp:TextBox ID="UniversityTextBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox>
+                                <asp:RequiredFieldValidator ControlToValidate="UniversityTextBox" CssClass="failureNotification" Display="Dynamic" 
+                                     ErrorMessage="At least one school you've attended is required." ID="EducationRequired" runat="server" 
+                                     ToolTip="At least one education is required." ValidationGroup="EditUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                              <p>
                                 <asp:Label ID="DegreeDropdownLabel" runat="server" AssociatedControlID="DegreeDropdown">Degree Level:</asp:Label>
@@ -267,6 +279,12 @@
                                         <asp:ListItem Value="Urban and Regional Studies">Urban and Regional Studies</asp:ListItem>
                                         <asp:ListItem Value="Women's & Gender Studies">Women's & Gender Studies</asp:ListItem>
                                 </asp:DropDownList>
+                            </p>
+                            <p>
+                                <asp:Label ID="GPALabel" runat="server" AssociatedControlID="GPABox">GPA:</asp:Label>
+                                <asp:TextBox ID = "GPABox" runat = "server" MaxLength = "10"> </asp:TextBox>
+                                <asp:RegularExpressionValidator ID = "GPAValidator" ControlToValidate = "GPABox" ValidationExpression = "\d{0,10}.?\d{0,10}"
+                                ErrorMessage = "Invalid GPA." runat="server">Format: 0.000 (4 point scale)</asp:RegularExpressionValidator> 
                             </p>
                             <p>
                                 <asp:Label ID="GraduationDate" runat="server" AssociatedControlID="GraduationMonth">Graduation Date:</asp:Label>
@@ -439,8 +457,11 @@
                             </p>
                         </fieldset>
                         <p class="submitButton">
-                            <asp:Button ID="SearchButton" runat="server" Text="Search" 
-                                 ValidationGroup="RegisterUserValidationGroup" onclick="OnSearchClick" />
+                            <asp:Button ID="EditUserButton" runat="server" CommandName="EditProfile" Text="Edit User" 
+                                 ValidationGroup="EditUserValidationGroup" PostBackUrl="Success.aspx"  />
+                                 <span class = "failureNotification" >
+                                     <asp:Literal ID = "EntryError" Visible="false" runat = "server"></asp:Literal>
+                                 </span>
                         </p>
                     </div>
-</asp:Content>
+        </asp:Content>

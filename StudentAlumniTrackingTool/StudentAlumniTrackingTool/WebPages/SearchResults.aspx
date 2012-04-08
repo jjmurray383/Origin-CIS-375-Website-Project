@@ -24,12 +24,19 @@
                                     <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
-                                            <asp:Image AlternateText = "Edit" ImageUrl = "~/Images/pencil.gif" runat = "server" />
+                                            <asp:LinkButton ID = "EditImageLink" runat = "server" 
+                                                PostBackUrl = '<%"~/WebPages/Edit.aspx?name="+Eval("Email") %>' >
+                                                <asp:Image AlternateText = "Edit" ImageUrl = "~/Images/pencil.gif" runat = "server" />
+                                            </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px">
+                                        
+                                            <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px">
                                         <ItemTemplate>
-                                            <asp:Image ID = "DeleteImg" AlternateText = "Delete" ImageUrl = "~/Images/delete.gif" runat = "server" />
+                                            <asp:LinkButton ID = "DeleteImageLink" runat = "server" 
+                                                PostBackUrl = '<%"~/WebPages/Delete.aspx?name="+Eval("Email") %>' >
+                                                <asp:Image ID = "DeleteImg" AlternateText = "Delete" ImageUrl = "~/Images/delete.gif" runat = "server" />
+                                            </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

@@ -15,7 +15,7 @@ namespace StudentAlumniTrackingTool.WebPages
 
         }
 
-        protected void OnSearchClick(object sender, EventArgs e)
+        protected void EditProfile(object sender, EventArgs e)
         {
             // Gather all fields - user may have them all entered
             TextBox FirstNameBox = (TextBox) FindControl("FirstNameBox");
@@ -26,10 +26,11 @@ namespace StudentAlumniTrackingTool.WebPages
             TextBox CityBox = (TextBox)FindControl("CityBox");
             DropDownList StateDropdown = (DropDownList)FindControl("StateDropdown");
             TextBox ZIPBox = (TextBox)FindControl("ZIPBox");
-            TextBox UniversityBox = (TextBox)FindControl("UniversityBox");
+            TextBox UniversityTextBox = (TextBox)FindControl("UniversityTextBox");
             DropDownList DegreeDropdown = (DropDownList)FindControl("DegreeDropdown");
             DropDownList MajorDropdown = (DropDownList)FindControl("MajorDropdown");
             DropDownList MinorDropdown = (DropDownList)FindControl("MinorDropdown");
+            TextBox GPABox = (TextBox) FindControl("GPABox");
             DropDownList GraduationMonth = (DropDownList)FindControl("GraduationMonth");
             DropDownList GradYearDropdown = (DropDownList)FindControl("GradYearDropdown");
             TextBox UniversityEmailBox = (TextBox)FindControl("UniversityEmailBox");
@@ -49,104 +50,76 @@ namespace StudentAlumniTrackingTool.WebPages
             TextBox EmployerHistoryEmailBox = (TextBox)FindControl("EmployerHistoryEmailBox");
 
             // Query the DB
-            SqlConnection dbConn = new SqlConnection();
             SqlCommand sqlComm = new SqlCommand();
 
+            int emptyCount = 0;
             try
             {
+                // Add SQL statement to update into database
                 sqlComm = new SqlCommand(
                     "");
-                string currentText;
-                if (!((currentText = FirstNameBox.Text).Equals(""))) {
-                    sqlComm.Parameters.Add("@FName", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = MiddleInitialBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@MI", System.Data.SqlDbType.Char).Value = currentText;
-                }
-                if (!((currentText = LastNameBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@LName", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = PhoneNumBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@PNum", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = StreetBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = StateDropdown.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = ZIPBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@ZIP", System.Data.SqlDbType.Char).Value = currentText;
-                }
-                if (!((currentText = UniversityBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
 
-                if (!((currentText = DegreeDropdown.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = MajorDropdown.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
 
-                if (!((currentText = MinorDropdown.Text).Equals("")))
+                // Add database parameters
+                sqlComm.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar).Value = FirstNameBox.Text;
+                sqlComm.Parameters.Add("@MI", System.Data.SqlDbType.Char).Value = MiddleInitialBox.Text;
+                sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = LastNameBox.Text;
+                sqlComm.Parameters.Add("@PNum", System.Data.SqlDbType.VarChar).Value = PhoneNumBox.Text;
+                sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
+                sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = StateDropdown.Text;
+                sqlComm.Parameters.Add("@ZIP", System.Data.SqlDbType.Char).Value = ZIPBox.Text;
+                sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
+                sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = DegreeDropdown.Text;
+                sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = MajorDropdown.Text;
+                sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = MinorDropdown.Text;
+                // Graduation date
+                DateTime dt;
+                String currentText, currentText2;
+                if (!((currentText = GradYearDropdown.Text).Equals("")) && !((currentText2 = GraduationMonth.Text).Equals("")))
                 {
-                    sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = currentText;
+                    dt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
+                    sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date).Value = dt;
                 }
+                sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float).Value = Convert.ToDouble(GPABox.Text);
+                sqlComm.Parameters.Add("@UEmail", System.Data.SqlDbType.VarChar).Value = UniversityEmailBox.Text;
+                sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
+                sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
+                sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
+                sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
+                sqlComm.Parameters.Add("@EmpEmail", System.Data.SqlDbType.VarChar).Value = EmployerEmailBox.Text;
+                // Employer start dates.
+                DateTime dtt;
+                string currentText3;
+                if (!((currentText = EmployerStartDateDDDay.Text).Equals("")) && !((currentText2 = EmployerStartDateDDMonth.Text).Equals(""))
+                    && ((currentText3 = EmployerStartDateDDDay.Text).Equals("")) )
+                {
+                    dtt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), Convert.ToInt32(currentText3));
+                    sqlComm.Parameters.Add("@EmpStrtDt", System.Data.SqlDbType.Date).Value = dtt;
+                }
+                // Employer end date
+                 DateTime dttt;
+                if (!((currentText = EmployerEndDateYear.Text).Equals("")) && !((currentText2 = EmployerEndDateMonth.Text).Equals(""))
+                    && ((currentText3 = EmployerEndDateDay.Text).Equals("")) )
+                {
+                    dttt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), Convert.ToInt32(currentText3));
+                    sqlComm.Parameters.Add("@EmpEndDt", System.Data.SqlDbType.Date).Value = dttt;
+                }
+                sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar).Value = EmployerHistoryBox.Text;
+                sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar).Value = EmployerHistoryTitleBox.Text;
+                sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar).Value = EmployerHistoryEmailBox.Text;
 
-                /* Graduation dropdowns */
+                string sqlQuery = sqlComm.ToString();
+                // Generate search query here as a session variable - will be passed to results page
+                Session["EditQuery"] = sqlQuery;
 
-                /* GPA somewhere in here */
+                // Finally, if script is built, execute the non query.
+                sqlComm.ExecuteNonQuery();
 
-                if (!((currentText = UniversityEmailBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Uemail", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
+                // Close database connection and dispose database objects
+                sqlComm.Dispose();
 
-                if (!((currentText = EmployerBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = EmployeeTitleBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = ScheduleBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = EmployerContactInfoBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-
-                if (!((currentText = EmployerEmailBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                /* Employer start and end dates */
-
-                if (!((currentText = EmployerHistoryBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = EmployerHistoryTitleBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
-                if (!((currentText = EmployerHistoryEmailBox.Text).Equals("")))
-                {
-                    sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar).Value = currentText;
-                }
+                // Redirect to success page
+                Response.Redirect(EditUserButton.PostBackUrl);
             }
             catch (Exception ex)
             {

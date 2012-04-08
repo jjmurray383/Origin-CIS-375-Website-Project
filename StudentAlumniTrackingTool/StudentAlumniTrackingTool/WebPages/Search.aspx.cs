@@ -207,12 +207,13 @@ namespace StudentAlumniTrackingTool.WebPages
                  */
                 if (emptyCount >= 30)
                 {
-                    EntryError.Text = "You did not specify any criteria. You cannot run an empty search";
+                    EntryError.Text = "You did not specify any criteria. You cannot have an empty profile.";
                     EntryError.Visible = true;
                 } else {
                     string sqlQuery = sqlComm.ToString();
                     // Generate search query here as a session variable - will be passed to results page
                     Session["SearchQuery"] = sqlQuery;
+                    Response.Redirect(SearchButton.PostBackUrl);
                 }
 
             } catch (Exception ex) {
