@@ -11,6 +11,8 @@ namespace StudentAlumniTrackingTool.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (User.Identity.IsAuthenticated)
+                Response.Redirect("~/Default.aspx");
             // RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
         }
     }

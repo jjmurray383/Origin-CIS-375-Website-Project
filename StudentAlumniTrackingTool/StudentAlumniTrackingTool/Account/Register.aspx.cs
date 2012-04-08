@@ -12,10 +12,13 @@ namespace StudentAlumniTrackingTool.Account
 {
     public partial class Register : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
+
+            // Assure user is not already logged in
+            if (User.Identity.IsAuthenticated == true)
+                Response.Redirect("RegisterError.aspx");
 
             if (!IsPostBack)
             {
@@ -26,7 +29,7 @@ namespace StudentAlumniTrackingTool.Account
                 DropDownList EmployerEndYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerEndDateYear");
                 for (int i = 1900; i <= year; i++)
                 {
-                    ListItem yearItem = new ListItem(i.ToString());
+                    ListItem yearItem = new ListItem(i.ToString(), i.ToString());
                     GradYear.Items.Add(yearItem);
                     EmployerStartYear.Items.Add(yearItem);
                     EmployerEndYear.Items.Add(yearItem);
@@ -37,12 +40,13 @@ namespace StudentAlumniTrackingTool.Account
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)
         {
-            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
+            bool addSuccess = false;
 
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
+            //string continueUrl = "Success.aspx";
             if (String.IsNullOrEmpty(continueUrl))
             {
-                continueUrl = "~/";
+                continueUrl = "~/Account/Success.aspx";
             }
 
 
@@ -107,59 +111,95 @@ namespace StudentAlumniTrackingTool.Account
             TextBox EmployerHistoryEmailBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("EmployerHistoryEmailBox");
 
             // Retrieve all the values from the registration form to insert into database
-            TextBox FirstNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("FirstName");
-            TextBox LastNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastName");
+            TextBox FirstNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("FirstNameBox");
+            TextBox LastNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastNameBox");
             TextBox UsernameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("UserName");
             sqlComm.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar).Value = FirstNameTextBox.Text;
-            sqlComm.Parameters.Add("@MI", System.Data.SqlDbType.Char).Value = MiddleInitialBox.Text;
+            try
+            {
+                sqlComm.Parameters.Add("@MI", System.Data.SqlDbType.Char).Value = MiddleInitialBox.Text;
+            }
+            catch (Exception e1)
+            {
+                //Do nothing
+            }
             sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = LastNameBox.Text;
-            sqlComm.Parameters.Add("@PNum", System.Data.SqlDbType.VarChar).Value = PhoneNumBox.Text;
-            sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
-            sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = StateDropdown.Text;
-            sqlComm.Parameters.Add("@ZIP", System.Data.SqlDbType.Char).Value = ZIPBox.Text;
-            sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
-            sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = DegreeDropdown.Text;
-            sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = MajorDropdown.Text;
-            sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = MinorDropdown.Text;
+            if (PhoneNumBox != null)
+                sqlComm.Parameters.Add("@PNum", System.Data.SqlDbType.VarChar).Value = PhoneNumBox.Text;
+            if (StreetBox.Text != null)
+                sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
+            if (StateDropdown.Text != null)
+                sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = StateDropdown.Text;
+            if (ZIPBox.Text != null)
+                sqlComm.Parameters.Add("@ZIP", System.Data.SqlDbType.Char).Value = ZIPBox.Text;
+            if (UniversityTextBox.Text != null)
+                sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
+            if (DegreeDropdown.Text != null)
+                sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = DegreeDropdown.Text;
+            if (MajorDropdown.Text != null)
+                sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = MajorDropdown.Text;
+            if (MinorDropdown.Text != null)
+                sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = MinorDropdown.Text;
             // Graduation date
             DateTime dt;
             String currentText, currentText2;
-            if (!((currentText = GradYearDropdown.Text).Equals("")) && !((currentText2 = GraduationMonth.Text).Equals("")))
+            if (((currentText = GradYearDropdown.SelectedValue) != null) && ((currentText2 = GraduationMonth.SelectedValue) != null) &&
+                GradYearDropdown.SelectedValue != "--" && GraduationMonth.SelectedValue != "--")
             {
                 dt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
                 sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date).Value = dt;
             }
-            sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float).Value = Convert.ToDouble(GPABox.Text);
-            sqlComm.Parameters.Add("@UEmail", System.Data.SqlDbType.VarChar).Value = UniversityEmailBox.Text;
-            sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
-            sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
-            sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
-            sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
-            sqlComm.Parameters.Add("@EmpEmail", System.Data.SqlDbType.VarChar).Value = EmployerEmailBox.Text;
+            if (GPABox.Text != null )
+                try
+                {
+                    sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float).Value = Convert.ToDouble(GPABox.Text);
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.ToString());
+                    // Do nothing
+                }
+            if (UniversityEmailBox.Text != null)
+                sqlComm.Parameters.Add("@UEmail", System.Data.SqlDbType.VarChar).Value = UniversityEmailBox.Text;
+            if (EmployerBox.Text != null)
+                sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
+            if (EmployeeTitleBox.Text != null)
+                    sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
+            if (ScheduleBox.Text != null)
+                sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
+            if (EmployerContactInfoBox.Text != null)
+                sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
+            if (EmployerEmailBox.Text != null)
+                sqlComm.Parameters.Add("@EmpEmail", System.Data.SqlDbType.VarChar).Value = EmployerEmailBox.Text;
             // Employer start dates.
             DateTime dtt;
             string currentText3;
-            if (!((currentText = EmployerStartDateDDDay.Text).Equals("")) && !((currentText2 = EmployerStartDateDDMonth.Text).Equals(""))
-                && ((currentText3 = EmployerStartDateDDDay.Text).Equals("")))
+            if (((currentText = EmployerStartDateDDDay.SelectedValue) != "--") && ((currentText2 = EmployerStartDateDDMonth.SelectedValue) != "--")
+                && ((currentText3 = EmployerStartDateDDDay.SelectedValue) != "--"))
             {
                 dtt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), Convert.ToInt32(currentText3));
                 sqlComm.Parameters.Add("@EmpStrtDt", System.Data.SqlDbType.Date).Value = dtt;
             }
             // Employer end date
             DateTime dttt;
-            if (!((currentText = EmployerEndDateYear.Text).Equals("")) && !((currentText2 = EmployerEndDateMonth.Text).Equals(""))
-                && ((currentText3 = EmployerEndDateDay.Text).Equals("")))
+            if (((currentText = EmployerEndDateYear.SelectedValue) != "--") && ((currentText2 = EmployerEndDateMonth.SelectedValue) != "--")
+                && ((currentText3 = EmployerEndDateDay.SelectedValue) != "--"))
             {
                 dttt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), Convert.ToInt32(currentText3));
                 sqlComm.Parameters.Add("@EmpEndDt", System.Data.SqlDbType.Date).Value = dttt;
             }
-            sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar).Value = EmployerHistoryBox.Text;
-            sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar).Value = EmployerHistoryTitleBox.Text;
-            sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar).Value = EmployerHistoryEmailBox.Text;
+            if (EmployerHistoryBox.Text != null)
+                sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar).Value = EmployerHistoryBox.Text;
+            if (EmployerHistoryTitleBox.Text != null)
+                sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar).Value = EmployerHistoryTitleBox.Text;
+            if (EmployerHistoryEmailBox.Text != null)
+                sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar).Value = EmployerHistoryEmailBox.Text;
 
-            string sqlQuery = sqlComm.ToString();
-            // Generate search query here as a session variable - will be passed to results page
-            Session["EditQuery"] = sqlQuery;
+
+                Roles.AddUserToRole(EmailTextBox.Text, "users");
+
+            // Set cookie (mmm, cookies)
+            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
 
             // Close database connection and dispose database objects
             DBCmd.Dispose();

@@ -9,12 +9,13 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+
     <form runat="server">
     <div class="page">
         <div class="header">
             <div class="title">
                 <h1>
-                    Alumni Social Tracker
+                    Student/Alumni Tracker
                 </h1>
             </div>
             <div class="loginDisplay">
@@ -24,43 +25,54 @@
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/Account/Logout.aspx"/> ]
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="/Account/Logout.aspx" /> ]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
             <asp:LoginView ID = "MenuLoginView" runat = "server" EnableViewState = "false">
                 <RoleGroups>
-                    <asp:RoleGroup Roles = "user">
-                        <ContentTemplate>
-                            <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
+                    <asp:RoleGroup Roles = "users" >
+                    <ContentTemplate>
+                        <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
+                        EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
+                        onmenuitemclick="NavigationMenu_MenuItemClick">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add"/>
+                        <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout">
+                        </asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+                </ContentTemplate>
+                    </asp:RoleGroup>
+                    <asp:RoleGroup Roles = "admins" >
+                    <ContentTemplate>
+                        <asp:Menu ID="AdminNavigationMenu" runat="server" CssClass="menu" 
                             EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
                             onmenuitemclick="NavigationMenu_MenuItemClick">
                             <Items>
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
+                                <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Edit/Delete"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/DeleteAll.aspx" Text="Delete All"/>
+                                <asp:MenuItem NavigateUrl="~/WebPages/Edit.aspx" Text="Edit" />
+                                <asp:MenuItem NavigateUrl="~/WebPages/Delete.aspx" Text="Delete" />
                                 <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
                             </Items>
-                             </asp:Menu> 
-                        </ContentTemplate>
+                         </asp:Menu>
+                    </ContentTemplate>
                     </asp:RoleGroup>
                 </RoleGroups>
-            <LoggedInTemplate>
-                <asp:Menu ID="RegularUserNavigationMenu" runat="server" CssClass="menu" 
-                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
-                    onmenuitemclick="NavigationMenu_MenuItemClick">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
-                        <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
-                        <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
-                    </Items>
-                        </asp:Menu>
+                <LoggedInTemplate>
+            <asp:Panel ID = "AdminPanel" runat="server" Visible = "false">
+                 
+            </asp:Panel>
+            <asp:Panel ID = "RegularUserPanel" runat="server" Visible = "false">
+            
+            </asp:Panel>
             </LoggedInTemplate>
             <AnonymousTemplate>
                 <asp:Menu ID="DefaultNavigationMenu" runat="server" CssClass="menu" 
@@ -68,12 +80,14 @@
                     onmenuitemclick="NavigationMenu_MenuItemClick">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add/Register"/>
+                         <asp:MenuItem NavigateUrl="~/Account/Login.aspx" Text="Login"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Sign Up"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                     </Items>
                 </asp:Menu>
-                </AnonymousTemplate>
+            </AnonymousTemplate>
             </asp:LoginView>
+           
             </div>
         </div>
         <div class="main">
@@ -86,5 +100,6 @@
         
     </div>
     </form>
+
 </body>
 </html>

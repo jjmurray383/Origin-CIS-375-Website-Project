@@ -12,6 +12,115 @@ namespace StudentAlumniTrackingTool.WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Page.ClientQueryString == null)
+                Response.Redirect("Error.aspx");
+            // Get user info from SQL
+            // Query the DB
+            string connectionString = "";
+            string queryStr;
+            SqlConnection sqlCon = new SqlConnection();
+            SqlCommand sqlComm = new SqlCommand();
+
+
+            // Assure user is themselves or is admin
+            string clientQuerystr = Page.ClientQueryString;
+            if (User.Identity.Name.Equals(Page.ClientQueryString) || User.Identity.Name.Equals("admin"))
+                Console.Write(Page.ClientQueryString);
+            else
+                Response.Redirect("Error.aspx");
+
+            // Popuate fields with data
+            TextBox FirstNameBox = (TextBox)FindControl("FirstNameBox");
+            TextBox MiddleInitialBox = (TextBox)FindControl("MiddleInitialBox");
+            TextBox LastNameBox = (TextBox)FindControl("LastNameBox");
+            TextBox PhoneNumBox = (TextBox)FindControl("PhoneNumBox");
+            TextBox StreetBox = (TextBox)FindControl("StreetBox");
+            TextBox CityBox = (TextBox)FindControl("CityBox");
+            DropDownList StateDropdown = (DropDownList)FindControl("StateDropdown");
+            TextBox ZIPBox = (TextBox)FindControl("ZIPBox");
+            TextBox UniversityTextBox = (TextBox)FindControl("UniversityTextBox");
+            DropDownList DegreeDropdown = (DropDownList)FindControl("DegreeDropdown");
+            DropDownList MajorDropdown = (DropDownList)FindControl("MajorDropdown");
+            DropDownList MinorDropdown = (DropDownList)FindControl("MinorDropdown");
+            TextBox GPABox = (TextBox)FindControl("GPABox");
+            DropDownList GraduationMonth = (DropDownList)FindControl("GraduationMonth");
+            DropDownList GradYearDropdown = (DropDownList)FindControl("GradYearDropdown");
+            TextBox UniversityEmailBox = (TextBox)FindControl("UniversityEmailBox");
+            TextBox EmployerBox = (TextBox)FindControl("EmployerBox");
+            TextBox EmployeeTitleBox = (TextBox)FindControl("EmployeeTitleBox");
+            TextBox ScheduleBox = (TextBox)FindControl("ScheduleBox");
+            TextBox EmployerContactInfoBox = (TextBox)FindControl("EmployerContactInfoBox");
+            TextBox EmployerEmailBox = (TextBox)FindControl("EmployerEmailBox");
+            DropDownList EmployerStartDateDDDay = (DropDownList)FindControl("EmployerStartDateDDDay");
+            DropDownList EmployerStartDateDDMonth = (DropDownList)FindControl("EmployerStartDateDDMonth");
+            DropDownList EmployerStartDateDDYear = (DropDownList)FindControl("EmployerStartDateDDYear");
+            DropDownList EmployerEndDateDay = (DropDownList)FindControl("EmployerEndDateDay");
+            DropDownList EmployerEndDateMonth = (DropDownList)FindControl("EmployerEndDateMonth");
+            DropDownList EmployerEndDateYear = (DropDownList)FindControl("EmployerEndDateYear");
+            TextBox EmployerHistoryBox = (TextBox)FindControl("EmployerHistoryBox");
+            TextBox EmployerHistoryTitleBox = (TextBox)FindControl("EmployerHistoryTitleBox");
+            TextBox EmployerHistoryEmailBox = (TextBox)FindControl("EmployerHistoryEmailBox");
+
+            sqlComm.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@MI", System.Data.SqlDbType.Char);
+            sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@PNum", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@ZIP", System.Data.SqlDbType.Char);
+            sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar);
+            // Graduation date
+           
+            sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date);
+            sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float);
+            sqlComm.Parameters.Add("@UEmail", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpEmail", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpStrtDt", System.Data.SqlDbType.Date);
+            sqlComm.Parameters.Add("@EmpEndDt", System.Data.SqlDbType.Date);
+            sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar);
+            sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar);
+
+            // SQL query here
+
+            // Return results will go here
+            FirstNameBox.Text = "";
+            MiddleInitialBox.Text = "";
+            LastNameBox.Text = "";
+            PhoneNumBox.Text = "";
+            StreetBox.Text = "";
+            CityBox.Text = "";
+            StateDropdown.Text = "";
+            ZIPBox.Text = "";
+            UniversityTextBox.Text = "";
+             DegreeDropdown.Text = ""; 
+             MajorDropdown.Text = ""; 
+             MinorDropdown.Text = ""; 
+             GPABox.Text = ""; 
+             GraduationMonth.Text = ""; 
+             GradYearDropdown.Text = "";
+             UniversityEmailBox.Text = "";
+             EmployerBox.Text = "";
+             EmployeeTitleBox.Text = ""; 
+             ScheduleBox.Text = ""; 
+             EmployerContactInfoBox.Text = "";
+             EmployerEmailBox.Text = "";
+             EmployerStartDateDDDay.Text = "";
+             EmployerStartDateDDMonth.Text = "";
+             EmployerStartDateDDYear.Text = "";
+             EmployerEndDateDay.Text = ""; 
+             EmployerEndDateMonth.Text = "";
+             EmployerEndDateYear.Text = "";
+             EmployerHistoryBox.Text = "";
+             EmployerHistoryTitleBox.Text = "";
+             EmployerHistoryEmailBox.Text = ""; 
 
         }
 
