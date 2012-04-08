@@ -22,13 +22,13 @@ namespace StudentAlumniTrackingTool.WebPages {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// RegisterUserValidationSummary control.
+        /// EditUserValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary RegisterUserValidationSummary;
+        protected global::System.Web.UI.WebControls.ValidationSummary EditUserValidationSummary;
         
         /// <summary>
         /// FirstNameLabel control.
@@ -47,6 +47,15 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FirstNameBox;
+        
+        /// <summary>
+        /// FirstNameRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FirstNameRequired;
         
         /// <summary>
         /// MiddleInitialLabel control.
@@ -83,6 +92,15 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox LastNameBox;
+        
+        /// <summary>
+        /// LastNameRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator LastNameRequired;
         
         /// <summary>
         /// PhoneNumLabel control.
@@ -193,13 +211,22 @@ namespace StudentAlumniTrackingTool.WebPages {
         protected global::System.Web.UI.WebControls.Label UniversityLabel;
         
         /// <summary>
-        /// UniversityBox control.
+        /// UniversityTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UniversityBox;
+        protected global::System.Web.UI.WebControls.TextBox UniversityTextBox;
+        
+        /// <summary>
+        /// EducationRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EducationRequired;
         
         /// <summary>
         /// DegreeDropdownLabel control.
@@ -254,6 +281,33 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList MinorDropdown;
+        
+        /// <summary>
+        /// GPALabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label GPALabel;
+        
+        /// <summary>
+        /// GPABox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox GPABox;
+        
+        /// <summary>
+        /// GPAValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator GPAValidator;
         
         /// <summary>
         /// GraduationDate control.
@@ -517,12 +571,21 @@ namespace StudentAlumniTrackingTool.WebPages {
         protected global::System.Web.UI.WebControls.TextBox EmployerHistoryEmailBox;
         
         /// <summary>
-        /// SearchButton control.
+        /// EditUserButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchButton;
+        protected global::System.Web.UI.WebControls.Button EditUserButton;
+        
+        /// <summary>
+        /// EntryError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal EntryError;
     }
 }
