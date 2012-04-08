@@ -327,7 +327,7 @@
                             <p>
                                 <asp:Label ID="EmployerStartDateLabel" runat="server" AssociatedControlID="EmployerStartDateDDDay">Start Date:</asp:Label>
                                 <asp:DropDownList ID = "EmployerStartDateDDDay" runat = "server">
-                                    <asp:ListItem Value="00">--</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                     <asp:ListItem Value="01">1</asp:ListItem>
                                     <asp:ListItem Value="02">2</asp:ListItem>
                                     <asp:ListItem Value="03">3</asp:ListItem>
@@ -361,28 +361,28 @@
                                     <asp:ListItem Value="31">31</asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:DropDownList ID = "EmployerStartDateDDMonth" runat = "server">
-                                    <asp:ListItem Value="Current">--</asp:ListItem>
-                                    <asp:ListItem Value="January">January</asp:ListItem>
-                                    <asp:ListItem Value="February">February</asp:ListItem>
-                                    <asp:ListItem Value="March">March</asp:ListItem>
-                                    <asp:ListItem Value="April">April</asp:ListItem>
-                                    <asp:ListItem Value="May">May</asp:ListItem>
-                                    <asp:ListItem Value="June">June</asp:ListItem>
-                                    <asp:ListItem Value="July">July</asp:ListItem>
-                                    <asp:ListItem Value="August">August</asp:ListItem>
-                                    <asp:ListItem Value="September">September</asp:ListItem>
-                                    <asp:ListItem Value="October">October</asp:ListItem>
-                                    <asp:ListItem Value="November">November</asp:ListItem>
-                                    <asp:ListItem Value="December">December</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
+                                    <asp:ListItem Value="1">January</asp:ListItem>
+                                    <asp:ListItem Value="2">February</asp:ListItem>
+                                    <asp:ListItem Value="3">March</asp:ListItem>
+                                    <asp:ListItem Value="4">April</asp:ListItem>
+                                    <asp:ListItem Value="5">May</asp:ListItem>
+                                    <asp:ListItem Value="6">June</asp:ListItem>
+                                    <asp:ListItem Value="7">July</asp:ListItem>
+                                    <asp:ListItem Value="8">August</asp:ListItem>
+                                    <asp:ListItem Value="9">September</asp:ListItem>
+                                    <asp:ListItem Value="10">October</asp:ListItem>
+                                    <asp:ListItem Value="11">November</asp:ListItem>
+                                    <asp:ListItem Value="12">December</asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:DropDownList ID = "EmployerStartDateDDYear" runat = "server">
-                                    <asp:ListItem Value="9999">--</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                 </asp:DropDownList>
                             </p>
                             <p>
                                 <asp:Label ID="EmployerEndDateLabel" runat="server" AssociatedControlID="EmployerEndDateDay">End Date:</asp:Label>
                                 <asp:DropDownList ID = "EmployerEndDateDay" runat = "server">
-                                    <asp:ListItem Value="">--</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                     <asp:ListItem Value="01">1</asp:ListItem>
                                     <asp:ListItem Value="02">2</asp:ListItem>
                                     <asp:ListItem Value="03">3</asp:ListItem>
@@ -416,22 +416,22 @@
                                     <asp:ListItem Value="31">31</asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:DropDownList ID = "EmployerEndDateMonth" runat = "server">
-                                    <asp:ListItem Value="">--</asp:ListItem>
-                                    <asp:ListItem Value="January">January</asp:ListItem>
-                                    <asp:ListItem Value="February">February</asp:ListItem>
-                                    <asp:ListItem Value="March">March</asp:ListItem>
-                                    <asp:ListItem Value="April">April</asp:ListItem>
-                                    <asp:ListItem Value="May">May</asp:ListItem>
-                                    <asp:ListItem Value="June">June</asp:ListItem>
-                                    <asp:ListItem Value="July">July</asp:ListItem>
-                                    <asp:ListItem Value="August">August</asp:ListItem>
-                                    <asp:ListItem Value="September">September</asp:ListItem>
-                                    <asp:ListItem Value="October">October</asp:ListItem>
-                                    <asp:ListItem Value="November">November</asp:ListItem>
-                                    <asp:ListItem Value="December">December</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
+                                    <asp:ListItem Value="1">January</asp:ListItem>
+                                    <asp:ListItem Value="2">February</asp:ListItem>
+                                    <asp:ListItem Value="3">March</asp:ListItem>
+                                    <asp:ListItem Value="4">April</asp:ListItem>
+                                    <asp:ListItem Value="5">May</asp:ListItem>
+                                    <asp:ListItem Value="6">June</asp:ListItem>
+                                    <asp:ListItem Value="7">July</asp:ListItem>
+                                    <asp:ListItem Value="8">August</asp:ListItem>
+                                    <asp:ListItem Value="9">September</asp:ListItem>
+                                    <asp:ListItem Value="10">October</asp:ListItem>
+                                    <asp:ListItem Value="11">November</asp:ListItem>
+                                    <asp:ListItem Value="12">December</asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:DropDownList ID = "EmployerEndDateYear" runat = "server">
-                                    <asp:ListItem Value="">--</asp:ListItem>
+                                    <asp:ListItem Value="--">--</asp:ListItem>
                                 </asp:DropDownList>
                             </p>
                             <strong>Employment History:</strong>

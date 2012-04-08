@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Account\RegisterError.aspx" />
     <Content Include="Account\Success.aspx" />
     <Content Include="Account\Logout.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -73,6 +74,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebPages\Success.aspx" />
+    <Content Include="WebPages\DeleteAll.aspx" />
+    <Content Include="WebPages\Delete.aspx" />
+    <Content Include="WebPages\Error.aspx" />
     <Content Include="WebPages\Edit.aspx" />
     <Content Include="WebPages\SearchResults.aspx" />
     <Content Include="WebPages\Profile.aspx" />
@@ -85,6 +90,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\RegisterError.aspx.cs">
+      <DependentUpon>RegisterError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\RegisterError.aspx.designer.cs">
+      <DependentUpon>RegisterError.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Success.aspx.cs">
       <DependentUpon>Success.aspx</DependentUpon>
@@ -131,6 +143,34 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebPages\Success.aspx.cs">
+      <DependentUpon>Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPages\Success.aspx.designer.cs">
+      <DependentUpon>Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebPages\DeleteAll.aspx.cs">
+      <DependentUpon>DeleteAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPages\DeleteAll.aspx.designer.cs">
+      <DependentUpon>DeleteAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebPages\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPages\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebPages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebPages\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>

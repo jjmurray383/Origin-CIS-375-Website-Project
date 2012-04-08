@@ -13,7 +13,11 @@ namespace StudentAlumniTrackingTool
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-
+            
+                Roles.CreateRole("users");
+                Roles.CreateRole("admins");
+                Roles.AddUserToRole("admin", "admins");
+            
         }
 
         void Application_End(object sender, EventArgs e)
