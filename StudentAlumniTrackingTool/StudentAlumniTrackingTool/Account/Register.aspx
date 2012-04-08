@@ -503,7 +503,8 @@
                         </fieldset>
                         <p class="submitButton">
                             <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 
-                                 ValidationGroup="RegisterUserValidationGroup" />
+                                 ValidationGroup="RegisterUserValidationGroup" 
+                                onclick="CreateUserButton_Click" />
                         </p>
                     </div>
                 </ContentTemplate>
@@ -513,7 +514,7 @@
             <asp:WizardStep ID="VerifyUser" runat="server">
                 
             </asp:WizardStep>
-            <asp:CompleteWizardStep runat = "server">
+            <asp:CompleteWizardStep ID="CompleteWizardStep1" runat = "server">
                 <ContentTemplate>
                     <h2>Account Created!</h2>
                 </ContentTemplate>
