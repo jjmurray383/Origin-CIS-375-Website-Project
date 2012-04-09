@@ -14,18 +14,7 @@ namespace StudentAlumniTrackingTool.WebPages
         {
             if (!IsPostBack)
             {
-                int year = System.DateTime.Now.Year;
-                year += 10; // Add for current students who don't graduate this year but in the next few coming years.
-                /* DropDownList GradYear = (DropDownList)Page.FindControl("GradYearDropdown");
-                DropDownList EmployerStartYear = (DropDownList)Page.FindControl("EmployerStartDateDDYear");
-                DropDownList EmployerEndYear = (DropDownList)Page.FindControl("EmployerEndDateYear");
-                */
-
-                for (int i = 1900; i <= year; i++)
-                {
-                    ListItem yearItem = new ListItem(i.ToString(), i.ToString(), true);
-                    GradYearDropdown.Items.Add(yearItem);
-                }
+               
             }
         }
 
