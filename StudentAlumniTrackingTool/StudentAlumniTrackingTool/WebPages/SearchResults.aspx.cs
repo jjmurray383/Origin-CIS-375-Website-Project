@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace StudentAlumniTrackingTool.WebPages
 {
@@ -12,8 +13,110 @@ namespace StudentAlumniTrackingTool.WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                string queryString = (string)(Session["SearchQuery"]);
+                int identifier = (int)Session["Identifier"];
+                string connectDBstring = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+                SqlConnection DBConn = new SqlConnection(connectDBstring);
+                SqlCommand sqlComm = new SqlCommand(queryString, DBConn);
+                switch (identifier)
+                {
+                    case 15:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string) Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 14:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 13:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 12:
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 11:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 10:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 9:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 8:
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];;
+
+                        break;
+                    case 7:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 6:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 5:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 4:
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 3:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        break;
+                    case 2:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        break;
+                    case 1:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        break;
+                    case 0:
+                        break;
+                }
+                //DBConn.Open();
+                sqlComm.Connection.Open();
+
+                ResultsGridView.DataSource = sqlComm.ExecuteReader();
+                ResultsGridView.DataBind();
+            }
+            catch (Exception except)
+            {
+                Console.WriteLine(except);
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+
             int count = 0;
-            string queryString = Request.ServerVariables["SearchQuery"];
+
+            
             if (queryString == null)
             {
                 NoResultsPanel.Visible = true;
@@ -23,8 +126,10 @@ namespace StudentAlumniTrackingTool.WebPages
             {
                 
                 ResultsPanel.Visible = true;
-                SqlDataSource1.ConnectionString = null; 
+                SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+                SqlDataSource1.SelectCommand = queryString;
             }
+              */
         }
 
         protected void ResultsGridView_SelectedIndexChanged(object sender, EventArgs e)

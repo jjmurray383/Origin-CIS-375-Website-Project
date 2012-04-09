@@ -172,10 +172,10 @@
                              <p>
                                 <asp:Label ID="DegreeDropdownLabel" runat="server" AssociatedControlID="DegreeDropdown">Degree Level:</asp:Label>
                                 <asp:DropDownList ID = "DegreeDropdown" runat = "server">
-                                    <asp:ListItem Value="Associate's">Associate's</asp:ListItem>
-                                    <asp:ListItem Value="Bachelor's">Bachelor's</asp:ListItem>
-                                    <asp:ListItem Value="Master's">Master's</asp:ListItem>
-                                    <asp:ListItem Value="Ph. D">Ph. D</asp:ListItem>
+                                    <asp:ListItem Value="AS">Associate's</asp:ListItem>
+                                    <asp:ListItem Value="BS">Bachelor's</asp:ListItem>
+                                    <asp:ListItem Value="MS">Master's</asp:ListItem>
+                                    <asp:ListItem Value="PhD">Ph. D</asp:ListItem>
                                 </asp:DropDownList>
                             </p>
                             <p>

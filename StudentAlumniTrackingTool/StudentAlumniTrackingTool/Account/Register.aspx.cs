@@ -90,9 +90,9 @@ namespace StudentAlumniTrackingTool.Account
                     myReader.Close();
                     DBConn.Close();
 
-#endregion Verify Student email is unique;
+            #endregion Verify Student email is unique;
 
-            #region Adding Student entity;
+                    #region Adding Student entity;
 
                     TextBox FirstNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("FirstNameBox");
                     TextBox LastNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastNameBox");
@@ -102,44 +102,43 @@ namespace StudentAlumniTrackingTool.Account
                     TextBox LastNameBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastNameBox");
                     TextBox PhoneNumBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("PhoneNumBox");
 
-                    string insertQuery = "INSERT INTO STUDENT (";
-                    for (int item = 0; item < StudentDatabaseColumns.Length; item++)
+                    if (FirstNameTextBox.Text != "" && LastNameTextBox.Text != "" && UsernameTextBox.Text != "" && PasswordBox.Text != "" && LastNameBox.Text != "")
                     {
-                        if (StudentDatabaseColumns[item] != "")
+                        string insertQuery = "INSERT INTO STUDENT (";
+                        for (int item = 0; item < StudentDatabaseColumns.Length; item++)
                         {
+
                             if (item == StudentDatabaseColumns.Length - 1)
                                 insertQuery += StudentDatabaseColumns[item];
                             else
                                 insertQuery += StudentDatabaseColumns[item] + ",";
-                        }
-                    }
 
-                    insertQuery += ") VALUES (";
-                    for (int item = 0; item < StudentDatabaseColumns.Length; item++)
-                    {
-                        if (StudentDatabaseColumns[item] != "")
+                        }
+
+                        insertQuery += ") VALUES (";
+                        for (int item = 0; item < StudentDatabaseColumns.Length; item++)
                         {
                             if (item == StudentDatabaseColumns.Length - 1)
                                 insertQuery += "@" + StudentDatabaseColumns[item];
                             else
                                 insertQuery += "@" + StudentDatabaseColumns[item] + ",";
                         }
+                        insertQuery += ");";
+                        sqlComm = new SqlCommand(insertQuery, DBConn);
+
+
+                        sqlComm.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar).Value = FirstNameTextBox.Text;
+                        sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+
+                        if (MiddleInitialBox.Text != "")
+                            sqlComm.Parameters.Add("@Minit", System.Data.SqlDbType.Char).Value = MiddleInitialBox.Text;
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = LastNameBox.Text;
+                        sqlComm.Parameters.Add("@Password", System.Data.SqlDbType.VarChar).Value = PasswordBox.Text;
+                        if (PhoneNumBox != null)
+                            sqlComm.Parameters.Add("@PhoneNum", System.Data.SqlDbType.VarChar).Value = PhoneNumBox.Text;
+                        DBConn.Open();
+                        sqlComm.ExecuteNonQuery();
                     }
-                    insertQuery += ");";
-                    sqlComm = new SqlCommand(insertQuery, DBConn);
-
-
-                    sqlComm.Parameters.Add("@Fname", System.Data.SqlDbType.VarChar).Value = FirstNameTextBox.Text;
-                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
-
-                    if (MiddleInitialBox.Text != "")
-                        sqlComm.Parameters.Add("@Minit", System.Data.SqlDbType.Char).Value = MiddleInitialBox.Text;
-                    sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = LastNameBox.Text;
-                    sqlComm.Parameters.Add("@Password", System.Data.SqlDbType.VarChar).Value = PasswordBox.Text;
-                    if (PhoneNumBox != null)
-                        sqlComm.Parameters.Add("@PhoneNum", System.Data.SqlDbType.VarChar).Value = PhoneNumBox.Text;
-                    DBConn.Open();
-                    sqlComm.ExecuteNonQuery();
                 }
 #endregion Adding Student entity;
 
@@ -149,44 +148,43 @@ namespace StudentAlumniTrackingTool.Account
                 TextBox CityBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("CityBox");
                 DropDownList StateDropdown = (DropDownList)RegisterUserWizardStep.ContentTemplateContainer.FindControl("StateDropdown");
                 TextBox ZIPBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("ZIPBox");
-
-                string insertQueryAddress = "INSERT INTO STUDENT_ADDRESS (";
-                for (int item = 0; item < StudentAddressDatabaseColumns.Length; item++)
+                if (StreetBox.Text != "" && CityBox.Text != "" && StateDropdown.Text != "--" && ZIPBox.Text != "")
                 {
-                    if (StudentAddressDatabaseColumns[item] != "")
+                    string insertQueryAddress = "INSERT INTO STUDENT_ADDRESS (";
+                    for (int item = 0; item < StudentAddressDatabaseColumns.Length; item++)
                     {
-                        if (item == StudentAddressDatabaseColumns.Length - 1)
-                            insertQueryAddress += StudentAddressDatabaseColumns[item];
-                        else
-                            insertQueryAddress += StudentAddressDatabaseColumns[item] + ",";
-                    }
-                }
 
-                insertQueryAddress += ") VALUES (";
-                for (int item = 0; item < StudentAddressDatabaseColumns.Length; item++)
-                {
-                    if (StudentAddressDatabaseColumns[item] != "")
-                    {
-                        if (item == StudentAddressDatabaseColumns.Length - 1)
-                            insertQueryAddress += "@" + StudentAddressDatabaseColumns[item];
-                        else
-                            insertQueryAddress += "@" + StudentAddressDatabaseColumns[item] + ",";
+                            if (item == StudentAddressDatabaseColumns.Length - 1)
+                                insertQueryAddress += StudentAddressDatabaseColumns[item];
+                            else
+                                insertQueryAddress += StudentAddressDatabaseColumns[item] + ",";
                     }
-                }
-                insertQueryAddress += ");";
-                if (insertQueryAddress != "INSERT INTO STUDENT_ADDRESS () VALUES ();")
-                {
-                    sqlComm = new SqlCommand(insertQueryAddress, DBConn);
-                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
-                    if (StreetBox.Text != null)
-                        sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
-                    if (StateDropdown.Text != null)
-                        sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = StateDropdown.Text;
-                    if (CityBox.Text != null)
-                        sqlComm.Parameters.Add("@City", System.Data.SqlDbType.VarChar).Value = CityBox.Text;
-                    if (ZIPBox.Text != null)
-                        sqlComm.Parameters.Add("@ZipCode", System.Data.SqlDbType.Char).Value = ZIPBox.Text;
-                    sqlComm.ExecuteNonQuery();
+
+                    insertQueryAddress += ") VALUES (";
+                    for (int item = 0; item < StudentAddressDatabaseColumns.Length; item++)
+                    {
+                       
+                            if (item == StudentAddressDatabaseColumns.Length - 1)
+                                insertQueryAddress += "@" + StudentAddressDatabaseColumns[item];
+                            else
+                                insertQueryAddress += "@" + StudentAddressDatabaseColumns[item] + ",";
+                        
+                    }
+                    insertQueryAddress += ");";
+                    if (insertQueryAddress != "INSERT INTO STUDENT_ADDRESS () VALUES ();")
+                    {
+                        sqlComm = new SqlCommand(insertQueryAddress, DBConn);
+                        sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                        if (StreetBox.Text != null)
+                            sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
+                        if (StateDropdown.Text != null)
+                            sqlComm.Parameters.Add("@State", System.Data.SqlDbType.VarChar).Value = StateDropdown.Text;
+                        if (CityBox.Text != null)
+                            sqlComm.Parameters.Add("@City", System.Data.SqlDbType.VarChar).Value = CityBox.Text;
+                        if (ZIPBox.Text != null)
+                            sqlComm.Parameters.Add("@ZipCode", System.Data.SqlDbType.Char).Value = ZIPBox.Text;
+                        sqlComm.ExecuteNonQuery();
+                    }
                 }
                 //Finished with adding Student_Address to database
 #endregion Adding Student_Address entity;
@@ -201,65 +199,71 @@ namespace StudentAlumniTrackingTool.Account
                 DropDownList GraduationMonth = (DropDownList)RegisterUserWizardStep.ContentTemplateContainer.FindControl("GraduationMonth");
                 DropDownList GradYearDropdown = (DropDownList)RegisterUserWizardStep.ContentTemplateContainer.FindControl("GradYearDropdown");
 
-                string insertQueryEducation = "INSERT INTO EDUCATION (";
-                for (int item = 0; item < EducationDatabaseColumns.Length; item++)
+                if (UniversityTextBox.Text != "" && DegreeDropdown.Text != "" && MajorDropdown.Text != "--" && GPABox.Text != "" && GraduationMonth.Text != "" && GradYearDropdown.Text != "")
                 {
-                    if (EducationDatabaseColumns[item] != "")
-                    {
-                        if (item == EducationDatabaseColumns.Length - 1)
-                            insertQueryEducation += EducationDatabaseColumns[item];
-                        else
-                            insertQueryEducation += EducationDatabaseColumns[item] + ",";
-                    }
-                }
 
-                insertQueryEducation += ") VALUES (";
-                for (int item = 0; item < EducationDatabaseColumns.Length; item++)
-                {
-                    if (EducationDatabaseColumns[item] != "")
+                    string insertQueryEducation = "INSERT INTO EDUCATION (";
+                    for (int item = 0; item < EducationDatabaseColumns.Length; item++)
                     {
-                        if (item == EducationDatabaseColumns.Length - 1)
-                            insertQueryEducation += "@" + EducationDatabaseColumns[item];
-                        else
-                            insertQueryEducation += "@" + EducationDatabaseColumns[item] + ",";
-                    }
-                }
-                insertQueryEducation += ");";
-                if (insertQueryEducation != "INSERT INTO EDUCATION () VALUES ();")
-                {
-                    sqlComm = new SqlCommand(insertQueryEducation, DBConn);
-                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
-                    if (UniversityTextBox.Text != null)
-                        sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
-                    if (DegreeDropdown.Text != null)
-                        sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = DegreeDropdown.Text;
-                    if (MajorDropdown.Text != null)
-                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = MajorDropdown.Text;
-                    if (MinorDropdown.Text != null)
-                        sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = MinorDropdown.Text;
-                    // Graduation date
-                    DateTime dt;
-                    String currentText, currentText2;
-                    currentText = GradYearDropdown.SelectedValue;
-                    currentText2 = GraduationMonth.SelectedValue;
-                    if ((currentText != null) && (currentText2 != null) &&
-                        (currentText != "--") && (currentText2 != "--") )
-                    {
-                        dt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
-                        sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date).Value = dt.ToString();
-                    }
-                    if (GPABox.Text != null)
-                        try
+                        if (EducationDatabaseColumns[item] != "")
                         {
-                            sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float).Value = Convert.ToDouble(GPABox.Text);
+                            if (item == EducationDatabaseColumns.Length - 1)
+                                insertQueryEducation += EducationDatabaseColumns[item];
+                            else
+                                insertQueryEducation += EducationDatabaseColumns[item] + ",";
                         }
-                        catch (Exception exc)
-                        {
-                            Console.WriteLine(exc.ToString());
-                            // Do nothing
-                        }
+                    }
 
-                    sqlComm.ExecuteNonQuery();
+                    insertQueryEducation += ") VALUES (";
+                    for (int item = 0; item < EducationDatabaseColumns.Length; item++)
+                    {
+                        if (EducationDatabaseColumns[item] != "")
+                        {
+                            if (item == EducationDatabaseColumns.Length - 1)
+                                insertQueryEducation += "@" + EducationDatabaseColumns[item];
+                            else
+                                insertQueryEducation += "@" + EducationDatabaseColumns[item] + ",";
+                        }
+                    }
+                    insertQueryEducation += ");";
+                    if (insertQueryEducation != "INSERT INTO EDUCATION () VALUES ();")
+                    {
+                        sqlComm = new SqlCommand(insertQueryEducation, DBConn);
+                        sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                        if (UniversityTextBox.Text != null)
+                            sqlComm.Parameters.Add("@SchoolName", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
+                        if (DegreeDropdown.Text != null)
+                            sqlComm.Parameters.Add("@Degree", System.Data.SqlDbType.VarChar).Value = DegreeDropdown.Text;
+                        if (MajorDropdown.Text != null)
+                            sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = MajorDropdown.Text;
+                        if (MinorDropdown.Text != null)
+                            sqlComm.Parameters.Add("@Minor", System.Data.SqlDbType.VarChar).Value = MinorDropdown.Text;
+                        // Graduation date
+                        DateTime dt;
+                        String currentText, currentText2;
+                        currentText = GradYearDropdown.SelectedValue;
+                        currentText2 = GraduationMonth.SelectedValue;
+                        if ((currentText != null) && (currentText2 != null) &&
+                            (currentText != "--") && (currentText2 != "--"))
+                        {
+                            //DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
+                            dt = new DateTime();
+                            dt = DateTime.Parse(currentText + "/" + currentText2);
+                            sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.Date).Value = dt.ToShortDateString();
+                        }
+                        if (GPABox.Text != null)
+                            try
+                            {
+                                sqlComm.Parameters.Add("@GPA", System.Data.SqlDbType.Float).Value = Convert.ToDouble(GPABox.Text);
+                            }
+                            catch (Exception exc)
+                            {
+                                Console.WriteLine(exc.ToString());
+                                // Do nothing
+                            }
+
+                        sqlComm.ExecuteNonQuery();
+                    }
                 }
                 //Finished with adding Student_Address to database
 
@@ -272,44 +276,47 @@ namespace StudentAlumniTrackingTool.Account
                 TextBox ScheduleBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("ScheduleBox");
                 TextBox EmployerContactInfoBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("EmployerContactInfoBox");
 
-                string insertQueryEmployment = "INSERT INTO EMPLOYMENT (";
-                for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
+                if (EmployerBox.Text != "" && EmployeeTitleBox.Text != "" && ScheduleBox.Text != "" && EmployerContactInfoBox.Text != "")
                 {
-                    if (EmploymentDatabaseColumns[item] != "")
+                    string insertQueryEmployment = "INSERT INTO EMPLOYMENT (";
+                    for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
                     {
-                        if (item == EmploymentDatabaseColumns.Length - 1)
-                            insertQueryEmployment += EmploymentDatabaseColumns[item];
-                        else
-                            insertQueryEmployment += EmploymentDatabaseColumns[item] + ",";
+                        if (EmploymentDatabaseColumns[item] != "")
+                        {
+                            if (item == EmploymentDatabaseColumns.Length - 1)
+                                insertQueryEmployment += EmploymentDatabaseColumns[item];
+                            else
+                                insertQueryEmployment += EmploymentDatabaseColumns[item] + ",";
+                        }
                     }
-                }
 
-                insertQueryEmployment += ") VALUES (";
-                for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
-                {
-                    if (EmploymentDatabaseColumns[item] != "")
+                    insertQueryEmployment += ") VALUES (";
+                    for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
                     {
-                        if (item == EmploymentDatabaseColumns.Length - 1)
-                            insertQueryEmployment += "@" + EmploymentDatabaseColumns[item];
-                        else
-                            insertQueryEmployment += "@" + EmploymentDatabaseColumns[item] + ",";
+                        if (EmploymentDatabaseColumns[item] != "")
+                        {
+                            if (item == EmploymentDatabaseColumns.Length - 1)
+                                insertQueryEmployment += "@" + EmploymentDatabaseColumns[item];
+                            else
+                                insertQueryEmployment += "@" + EmploymentDatabaseColumns[item] + ",";
+                        }
                     }
-                }
-                insertQueryEmployment += ");";
-                if (insertQueryEmployment != "INSERT INTO EMPLOYMENT () VALUES ();")
-                {
-                    sqlComm = new SqlCommand(insertQueryEmployment, DBConn);
-                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
-                    if (EmployerBox.Text != null)
-                        sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
-                    if (EmployeeTitleBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
-                    if (ScheduleBox.Text != null)
-                        sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
-                    if (EmployerContactInfoBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
+                    insertQueryEmployment += ");";
+                    if (insertQueryEmployment != "INSERT INTO EMPLOYMENT () VALUES ();")
+                    {
+                        sqlComm = new SqlCommand(insertQueryEmployment, DBConn);
+                        sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                        if (EmployerBox.Text != null)
+                            sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
+                        if (EmployeeTitleBox.Text != null)
+                            sqlComm.Parameters.Add("@EmployeeTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
+                        if (ScheduleBox.Text != null)
+                            sqlComm.Parameters.Add("@Schedule", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
+                        if (EmployerContactInfoBox.Text != null)
+                            sqlComm.Parameters.Add("@ContactInformation", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
 
-                    sqlComm.ExecuteNonQuery();
+                        sqlComm.ExecuteNonQuery();
+                    }
                 }
                 //Finished Adding to Employment
 #endregion Adding Employment entity;
@@ -327,66 +334,59 @@ namespace StudentAlumniTrackingTool.Account
                 TextBox EmployerHistoryTitleBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("EmployerHistoryTitleBox");
                 TextBox EmployerHistoryEmailBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("EmployerHistoryEmailBox");
 
-                string insertQueryEmploymentHistory = "INSERT INTO EMPLOYMENT (";
-                for (int item = 0; item < EmploymentHistoryDatabaseColumns.Length; item++)
+                if (EmployerHistoryBox.Text != "" && EmployerHistoryTitleBox.Text != "" && ScheduleBox.Text != "" && EmployerContactInfoBox.Text != "")
                 {
-                    if (EmploymentHistoryDatabaseColumns[item] != "")
+                    string insertQueryEmploymentHistory = "INSERT INTO EMPLOYMENT (";
+                    for (int item = 0; item < EmploymentHistoryDatabaseColumns.Length; item++)
                     {
-                        if (item == EmploymentHistoryDatabaseColumns.Length - 1)
-                            insertQueryEmploymentHistory += EmploymentHistoryDatabaseColumns[item];
-                        else
-                            insertQueryEmploymentHistory += EmploymentHistoryDatabaseColumns[item] + ",";
+                        if (EmploymentHistoryDatabaseColumns[item] != "")
+                        {
+                            if (item == EmploymentHistoryDatabaseColumns.Length - 1)
+                                insertQueryEmploymentHistory += EmploymentHistoryDatabaseColumns[item];
+                            else
+                                insertQueryEmploymentHistory += EmploymentHistoryDatabaseColumns[item] + ",";
+                        }
                     }
-                }
 
-                insertQueryEmploymentHistory += ") VALUES (";
-                for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
-                {
-                    if (EmploymentDatabaseColumns[item] != "")
+                    insertQueryEmploymentHistory += ") VALUES (";
+                    for (int item = 0; item < EmploymentDatabaseColumns.Length; item++)
                     {
-                        if (item == EmploymentDatabaseColumns.Length - 1)
-                            insertQueryEmployment += "@" + EmploymentDatabaseColumns[item];
-                        else
-                            insertQueryEmployment += "@" + EmploymentDatabaseColumns[item] + ",";
+                        if (EmploymentDatabaseColumns[item] != "")
+                        {
+                            if (item == EmploymentDatabaseColumns.Length - 1)
+                                insertQueryEmploymentHistory += "@" + EmploymentDatabaseColumns[item];
+                            else
+                                insertQueryEmploymentHistory += "@" + EmploymentDatabaseColumns[item] + ",";
+                        }
                     }
-                }
-                insertQueryEmployment += ");";
-                if (insertQueryEmployment != "INSERT INTO EMPLOYMENT () VALUES ();")
-                {
-                    sqlComm = new SqlCommand(insertQueryEmployment, DBConn);
-                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
-                    if (EmployerBox.Text != null)
-                        sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
-                    if (EmployeeTitleBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
-                    if (ScheduleBox.Text != null)
-                        sqlComm.Parameters.Add("@Sched", System.Data.SqlDbType.VarChar).Value = ScheduleBox.Text;
-                    if (EmployerContactInfoBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpCtctInf", System.Data.SqlDbType.VarChar).Value = EmployerContactInfoBox.Text;
-                    // Employer start dates.
-                    DateTime dtt;
-                    string currentText3, currentTextEmpl, currentTextEmpl2;
-                    if (((currentTextEmpl = EmployerStartDateDDDay.SelectedValue) != "--") && ((currentTextEmpl2 = EmployerStartDateDDMonth.SelectedValue) != "--")
-                        && ((currentText3 = EmployerStartDateDDDay.SelectedValue) != "--"))
+                    insertQueryEmploymentHistory += ");";
+                    if (insertQueryEmploymentHistory != "INSERT INTO EMPLOYMENT () VALUES ();")
                     {
-                        dtt = new DateTime(Convert.ToInt32(currentTextEmpl), Convert.ToInt32(currentTextEmpl2), Convert.ToInt32(currentText3));
-                        sqlComm.Parameters.Add("@EmpStrtDt", System.Data.SqlDbType.Date).Value = dtt;
+                        sqlComm = new SqlCommand(insertQueryEmploymentHistory, DBConn);
+                        sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
+                        if (EmployerBox.Text != null)
+                            sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
+                        if (EmployeeTitleBox.Text != null)
+                            sqlComm.Parameters.Add("@EmpLoyeeTitle", System.Data.SqlDbType.VarChar).Value = EmployeeTitleBox.Text;
+                        // Employer start dates.
+                        DateTime dtt;
+                        string currentText3, currentTextEmpl, currentTextEmpl2;
+                        if (((currentTextEmpl = EmployerStartDateDDDay.SelectedValue) != "--") && ((currentTextEmpl2 = EmployerStartDateDDMonth.SelectedValue) != "--")
+                            && ((currentText3 = EmployerStartDateDDYear.SelectedValue) != "--"))
+                        {
+                            dtt = DateTime.Parse(currentTextEmpl + "/" + currentTextEmpl2 + "/" + EmployerStartDateDDYear);
+                            sqlComm.Parameters.Add("@StartDate", System.Data.SqlDbType.Date).Value = dtt.ToShortDateString();
+                        }
+                        // Employer end date
+                        DateTime dttt;
+                        if (((currentTextEmpl = EmployerEndDateYear.SelectedValue) != "--") && ((currentTextEmpl2 = EmployerEndDateMonth.SelectedValue) != "--")
+                            && ((currentText3 = EmployerEndDateDay.SelectedValue) != "--"))
+                        {
+                            dttt = DateTime.Parse(currentTextEmpl + "/" + currentTextEmpl2 + "/" + EmployerStartDateDDYear);
+                            sqlComm.Parameters.Add("@EndDate", System.Data.SqlDbType.Date).Value = dttt.ToShortDateString();
+                        }
+                        sqlComm.ExecuteNonQuery();
                     }
-                    // Employer end date
-                    DateTime dttt;
-                    if (((currentTextEmpl = EmployerEndDateYear.SelectedValue) != "--") && ((currentTextEmpl2 = EmployerEndDateMonth.SelectedValue) != "--")
-                        && ((currentText3 = EmployerEndDateDay.SelectedValue) != "--"))
-                    {
-                        dttt = new DateTime(Convert.ToInt32(currentTextEmpl), Convert.ToInt32(currentTextEmpl2), Convert.ToInt32(currentText3));
-                        sqlComm.Parameters.Add("@EmpEndDt", System.Data.SqlDbType.Date).Value = dttt;
-                    }
-                    if (EmployerHistoryBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpHist", System.Data.SqlDbType.VarChar).Value = EmployerHistoryBox.Text;
-                    if (EmployerHistoryTitleBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpHistTitle", System.Data.SqlDbType.VarChar).Value = EmployerHistoryTitleBox.Text;
-                    if (EmployerHistoryEmailBox.Text != null)
-                        sqlComm.Parameters.Add("@EmpHistEmail", System.Data.SqlDbType.VarChar).Value = EmployerHistoryEmailBox.Text;
-                    sqlComm.ExecuteNonQuery();
                 }
                 #endregion Adding Employment_History entity;
                 
