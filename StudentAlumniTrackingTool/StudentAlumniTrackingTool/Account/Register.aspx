@@ -39,21 +39,21 @@
                             </p>
                             <p>
                                 <asp:Label ID="EmailLabel2" runat="server" AssociatedControlID="Email">E-mail (repeat):</asp:Label>
-                                <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox>
+                                <asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
                                      CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
                                      ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                             <p>
                                 <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
-                                <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
                                      CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                                      ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                             </p>
                             <p>
                                 <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword">Confirm Password:</asp:Label>
-                                <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" CssClass="failureNotification" Display="Dynamic" 
                                      ErrorMessage="Confirm Password is required." ID="ConfirmPasswordRequired" runat="server" 
                                      ToolTip="Confirm Password is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -64,7 +64,7 @@
                             <legend>Profile Information</legend>
                             <p>
                                 <asp:Label ID="FirstNameLabel" runat="server" AssociatedControlID="FirstNameBox">First Name:</asp:Label>
-                                <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="20"></asp:TextBox>
+                                <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="20"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ControlToValidate="FirstNameBox" CssClass="failureNotification" Display="Dynamic" 
                                      ErrorMessage="You must enter a first name." ID="FirstNameRequired" runat="server" 
                                      ToolTip="You must enter a first name." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -76,7 +76,7 @@
                             </p>
                             <p>
                                 <asp:Label ID="LastNameLabel" runat="server" AssociatedControlID="LastNameBox">Last Name:</asp:Label>
-                                <asp:TextBox ID="LastNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="25"></asp:TextBox>
+                                <asp:TextBox ID="LastNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="25"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ControlToValidate="LastNameBox" CssClass="failureNotification" Display="Dynamic" 
                                      ErrorMessage="You must enter a last name." ID="LastNameRequired" runat="server" 
                                      ToolTip="You must enter a last name." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -88,6 +88,9 @@
                                 ErrorMessage = "Invalid phone number." runat="server">Format: 1234567890</asp:RegularExpressionValidator> 
                             </p>
                             <strong>Address</strong>
+                            <p>
+                                <strong>Please enter your address in its entirety.</strong>
+                            </p>
                             <p>
                                 <asp:Label ID="StreetNumLabel" runat="server" AssociatedControlID="StreetBox">Number/street:</asp:Label>
                                 <asp:TextBox ID="StreetBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="25"></asp:TextBox>
@@ -161,7 +164,7 @@
                             <strong>Education Info</strong>
                             <p>
                                 <asp:Label ID="UniversityLabel" runat="server" AssociatedControlID="UniversityTextBox">College/University Name:</asp:Label>
-                                <asp:TextBox ID="UniversityTextBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox>
+                                <asp:TextBox ID="UniversityTextBox" runat="server" CssClass="textEntry" TextMode="SingleLine"></asp:TextBox><span class="failureNotification">*</span>
                                 <asp:RequiredFieldValidator ControlToValidate="UniversityTextBox" CssClass="failureNotification" Display="Dynamic" 
                                      ErrorMessage="At least one school you've attended is required." ID="EducationRequired" runat="server" 
                                      ToolTip="At least one education is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
