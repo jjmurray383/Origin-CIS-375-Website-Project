@@ -30,11 +30,14 @@ namespace StudentAlumniTrackingTool.Account
                 DropDownList EmployerEndYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerEndDateYear");
                 for (int i = 1900; i <= year; i++)
                 {
-                    ListItem yearItem = new ListItem(i.ToString(), i.ToString());
+                    ListItem yearItem = new ListItem(i.ToString(), i.ToString(), true);
                     GradYear.Items.Add(yearItem);
                     EmployerStartYear.Items.Add(yearItem);
                     EmployerEndYear.Items.Add(yearItem);
                 }
+                GradYear.DataBind();
+                EmployerStartYear.DataBind();
+                EmployerEndYear.DataBind();
             }
         }
 
@@ -248,8 +251,10 @@ namespace StudentAlumniTrackingTool.Account
                     // Graduation date
                     DateTime dt;
                     String currentText, currentText2;
-                    if (((currentText = GradYearDropdown.SelectedValue) != null) && ((currentText2 = GraduationMonth.SelectedValue) != null) &&
-                        GradYearDropdown.SelectedValue != "--" && GraduationMonth.SelectedValue != "--")
+                    currentText = GradYearDropdown.SelectedValue;
+                    currentText2 = GraduationMonth.SelectedValue;
+                    if ((currentText != null) && (currentText2 != null) &&
+                        (currentText != "--") && (currentText2 != "--") )
                     {
                         dt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
                         sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date).Value = dt.ToString();
@@ -396,7 +401,7 @@ namespace StudentAlumniTrackingTool.Account
                 
                 Roles.AddUserToRole(EmailTextBox.Text, "users");
 
-                // Set cookie (mmm, cookies)
+                // Set cookie (mmm, cookies...)
                 FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
 
                 // Close database connection and dispose database objects
