@@ -12,7 +12,8 @@ namespace StudentAlumniTrackingTool.WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            // Set error text of reasoning of what may have happened.
+            ErrorSource.Text = Request.ServerVariables["ErrorOccured"];
         }
     }
 }

@@ -13,19 +13,20 @@
                                 AutoGenerateColumns = "False" DataSourceID = "SqlDataSource1" 
                                 Width="100%" onselectedindexchanged="ResultsGridView_SelectedIndexChanged">
                                 <Columns>
-                                    <asp:BoundField DataField = "LastName" HeaderText = "Last Name" SortExpression = "LastName" />
-                                    <asp:TemplateField HeaderText = "First Name">
-                                        <ItemTemplate>
+                                    <asp:BoundField DataField = "Lastname" HeaderText = "Last Name" SortExpression = "LastName" />
+                                    <asp:BoundField DataField = "Firstname" HeaderText = "First Name" SortExpression = "FirstName" />
+                                    <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
+                                    <%--<asp:TemplateField HeaderText = "First Name">
+                                         <ItemTemplate>
                                             <asp:LinkButton ID = "LinkName" runat = "server" 
-                                            Text='<%# Eval("Email") %>'
-                                            PostBackUrl = '<%"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                            Text='<%# Eval("Email") %>'> </asp:LinkButton>
+                                        </ItemTemplate> 
+                                    </asp:TemplateField>--%>
+                                    <%--Education --%>
                                     <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
-                                            <asp:LinkButton ID = "EditImageLink" runat = "server" 
-                                                PostBackUrl = '<%"~/WebPages/Edit.aspx?name="+Eval("Email") %>' >
+                                            <asp:LinkButton ID = "EditImageLink" runat = "server" >
                                                 <asp:Image AlternateText = "Edit" ImageUrl = "~/Images/pencil.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -33,8 +34,7 @@
                                         
                                             <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID = "DeleteImageLink" runat = "server" 
-                                                PostBackUrl = '<%"~/WebPages/Delete.aspx?name="+Eval("Email") %>' >
+                                            <asp:LinkButton ID = "DeleteImageLink" runat = "server" >
                                                 <asp:Image ID = "DeleteImg" AlternateText = "Delete" ImageUrl = "~/Images/delete.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
