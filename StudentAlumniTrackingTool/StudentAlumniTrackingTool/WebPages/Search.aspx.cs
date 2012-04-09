@@ -20,77 +20,115 @@ namespace StudentAlumniTrackingTool.WebPages
 
         protected void OnSearchClick(object sender, EventArgs e)
         {
-            // Gather all fields - user may have them all entered
-            /* LastNameBox;
-            TextBox LastNameBox = (TextBox)FindControl("LastNameBox");
-            DropDownList MajorDropdown = (DropDownList)FindControl("MajorDropdown");
-            DropDownList GraduationMonth = (DropDownList)FindControl("GraduationMonth");
-            DropDownList GradYearDropdown = (DropDownList)FindControl("GradYearDropdown");
-            TextBox EmployerBox = (TextBox)FindControl("EmployerBox"); */
 
+        }
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // Gather all fields - user may have them all entered
+
+            TextBox LastNameBox = this.LastNameBox;
+            DropDownList MajorDropdown = this.MajorDropdown;
+            DropDownList GraduationMonth = this.GraduationMonth;
+            DropDownList GradYearDropdown = this.GradYearDropdown;
+            TextBox EmployerBox = this.EmployerBox;
+            DateTime dt;
+            bool Successful = false;
             // Query the DB
             SqlCommand sqlComm = new SqlCommand();
 
             int emptyCount = 0;
+            int identifier = 0;
             try
             {
                 // Start SQL command here for parameterization 
                 sqlComm = new SqlCommand(
-                    "");
+                    "SELECT STUDENT.Fname, STUDENT.Lname, EDUCATION.SchoolName FROM STUDENT, EDUCATION ");
 
                 string currentText;
+                if (!((currentText = EmployerBox.Text).Equals("")))
+                {
+                    sqlComm.CommandText += ", EMPLOYMENT WHERE(EmployerName LIKE @EmployerName AND EMPLOYMENT.Email = STUDENT.Email";
+                    sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = "%" + currentText + "%";
+                    Session["EmployerName"] = "%" + currentText + "%";
+                    identifier++;
+                }
+                else emptyCount++;
+
                 if (!((currentText = LastNameBox.Text).Equals("")))
                 {
-                    sqlComm.Parameters.Add("@LName", System.Data.SqlDbType.VarChar).Value = currentText;
+                    if(emptyCount==1)
+                        sqlComm.CommandText += "WHERE(STUDENT.Lname LIKE @Lname";
+                    else
+                        sqlComm.CommandText += " AND Lname LIKE @Lname";
+                    sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = "%" + currentText + "%";
+                    Session["Lname"] = "%" + currentText + "%";
+                    identifier = identifier + 2;
                 }
                 else emptyCount++;
                 if (!((currentText = MajorDropdown.Text).Equals("")))
                 {
-                    sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = currentText;
+                    if (emptyCount == 2)
+                        sqlComm.CommandText += "WHERE(Major LIKE @Major";
+                    else
+                        sqlComm.CommandText += " AND Major LIKE @Major";
+                    sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = "%" + currentText + "%";
+                    Session["Major"] = "%" + currentText + "%";
+                    identifier = identifier + 4;
                 }
                 else emptyCount++;
 
                 /* Graduation dropdowns */
-                DateTime dt;
+                
                 String currentText2;
                 if (!((currentText = GradYearDropdown.SelectedValue).Equals("")) && !((currentText2 = GraduationMonth.SelectedValue).Equals("")))
                 {
-                    dt = new DateTime(Convert.ToInt32(currentText), Convert.ToInt32(currentText2), 0);
-                    sqlComm.Parameters.Add("@GradDate", System.Data.SqlDbType.Date).Value = dt;
+                    if (emptyCount == 3)
+                        sqlComm.CommandText += "WHERE(GraduationDate LIKE @GraduationDate";
+                    else
+                        sqlComm.CommandText += " AND GraduationDate LIKE @GraduationDate";
+                    dt = DateTime.Parse(currentText + "/" + currentText2);
+                    sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.Date).Value = "%" + dt.ToShortDateString() + "%";
+                    Session["GraduationDate"] = "%" + dt.ToShortDateString() + "%";
+                    identifier = identifier + 8;
                 }
-                else 
-                    emptyCount += 3;
-                
-                if (!((currentText = EmployerBox.Text).Equals("")))
+                else
                 {
-                    sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = currentText;
+                    emptyCount++;
                 }
-                else emptyCount++;
-
                 /* 
                  * Make sure we have a query we can actually run; in other words, that the user put in SOME 
                  * sort of data so that we don't run empty searches.
                  */
 
-                
-                if (emptyCount >= 30)
+
+                if (emptyCount >= 4)
                 {
                     EntryError.Text = "You did not specify any criteria. You cannot run an empty search.";
                     EntryError.Visible = true;
-                } else {
-                    string sqlQuery = sqlComm.ToString();
+                }
+                else
+                {
+                    sqlComm.CommandText += " AND STUDENT.Email = EDUCATION.Email);";
+                    string sqlQuery = sqlComm.CommandText;
                     // Generate search query here as a session variable - will be passed to results page
                     Session["SearchQuery"] = sqlQuery;
-                    Response.Redirect(SearchButton.PostBackUrl);
+                    Session["Identifier"] = identifier;
+                    Successful = true;
                 }
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
             }
-            finally {
+            finally
+            {
                 // Close DB connection and queries
                 sqlComm.Dispose();
             }
-        } 
+            if(Successful)
+                Response.Redirect("SearchResults.aspx");
+        }
+        
     }
 }

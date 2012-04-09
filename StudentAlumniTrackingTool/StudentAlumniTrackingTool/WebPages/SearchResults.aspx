@@ -10,10 +10,10 @@
                         </p>
                         <asp:Panel ID="ResultsPanel" runat="server" Visible="False">
                             <asp:GridView ID = "ResultsGridView" runat = "server" 
-                                AutoGenerateColumns = "False" DataSourceID = "SqlDataSource1" 
+                                AutoGenerateColumns = "False" DataSourceID = "" 
                                 Width="100%" onselectedindexchanged="ResultsGridView_SelectedIndexChanged">
                                 <Columns>
-                                    <asp:BoundField DataField = "Lastname" HeaderText = "Last Name" SortExpression = "LastName" />
+                                    <asp:BoundField DataField = "LastName" HeaderText = "Last Name" SortExpression = "LastName" />
                                     <asp:BoundField DataField = "Firstname" HeaderText = "First Name" SortExpression = "FirstName" />
                                     <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
                                     <%--<asp:TemplateField HeaderText = "First Name">
@@ -22,8 +22,6 @@
                                             Text='<%# Eval("Email") %>'> </asp:LinkButton>
                                         </ItemTemplate> 
                                     </asp:TemplateField>--%>
-                                    <%--Education --%>
-                                    <asp:BoundField DataField = "Education" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "EditImageLink" runat = "server" >
@@ -44,11 +42,7 @@
 
                             <asp:SqlDataSource ID = "SqlDataSource1" 
                             runat = "server" 
-                            SelectCommand="SELECT FROM WHERE">
-                                    <SelectParameters>
-                                        <asp:ControlParameter ControlID = " " Name = "FirstName" PropertyName = "Text" Type = "String" />
-
-                                    </SelectParameters>
+                            SelectCommand="">
                                 </asp:SqlDataSource>
                         </asp:Panel>
                         <asp:Panel ID = "ErrorPanel" runat="server">

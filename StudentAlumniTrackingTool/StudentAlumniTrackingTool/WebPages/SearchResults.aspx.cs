@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace StudentAlumniTrackingTool.WebPages
 {
@@ -13,9 +13,110 @@ namespace StudentAlumniTrackingTool.WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Make sure our query has content, if it does not, we don't search for anything
+            try
+            {
+                string queryString = (string)(Session["SearchQuery"]);
+                int identifier = (int)Session["Identifier"];
+                string connectDBstring = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+                SqlConnection DBConn = new SqlConnection(connectDBstring);
+                SqlCommand sqlComm = new SqlCommand(queryString, DBConn);
+                switch (identifier)
+                {
+                    case 15:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string) Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 14:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 13:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 12:
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 11:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 10:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+
+                        break;
+                    case 9:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];
+                        break;
+                    case 8:
+                        sqlComm.Parameters.Add("@GraduationDate", System.Data.SqlDbType.VarChar).Value = (string)Session["GraduationDate"];;
+
+                        break;
+                    case 7:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 6:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 5:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 4:
+                        sqlComm.Parameters.Add("@Major", System.Data.SqlDbType.VarChar).Value = (string)Session["Major"];
+                        break;
+                    case 3:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        break;
+                    case 2:
+                        sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = (string)Session["Lname"];
+                        break;
+                    case 1:
+                        sqlComm.Parameters.Add("@EmployerName", System.Data.SqlDbType.VarChar).Value = (string)Session["EmployerName"];
+                        break;
+                    case 0:
+                        break;
+                }
+                //DBConn.Open();
+                sqlComm.Connection.Open();
+
+                ResultsGridView.DataSource = sqlComm.ExecuteReader();
+                ResultsGridView.DataBind();
+            }
+            catch (Exception except)
+            {
+                Console.WriteLine(except);
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+
             int count = 0;
-            string queryString = Request.ServerVariables["SearchQuery"];    // session var from Search
+
+            
             if (queryString == null)
             {
                 NoResultsPanel.Visible = true;
@@ -25,44 +126,10 @@ namespace StudentAlumniTrackingTool.WebPages
             {
                 
                 ResultsPanel.Visible = true;
-                SqlDataSource1.ConnectionString = null;
-                
+                SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+                SqlDataSource1.SelectCommand = queryString;
             }
-            // Take the query string as a session var "passed in" from Search and run it
-            // First gather connection string
-            string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            SqlCommand sqlCom = new SqlCommand(queryString);
-            SqlConnection sqlConn = new SqlConnection(connectionString);
-
-            // Try running the command
-            
-            try {
-                sqlCom = new SqlCommand("SELECT ");
-                // The variables in the DataGrid NEED to be identical to what is in the SQL query
-                sqlConn = new SqlConnection(connectionString);
-                sqlConn.Open();
-
-                /*
-                 * Bind the datasource of the GridView on this SearchResults.aspx page to the
-                 * results generated by running this query.
-                 */
-
-                // Execute SQL
-                ResultsGridView.DataSource = sqlCom.ExecuteReader();
-
-                // Bind
-                ResultsGridView.DataBind();
-            }
-            
-            catch (Exception ex) {
-                Response.Redirect("Error.aspx");
-                Session["ErrorOccured"] = ex.ToString();
-            }
-            finally {
-                // Close and dispose (hey, that rhymed!)
-                sqlConn.Close();
-                sqlCom.Dispose();
-            }
+              */
         }
 
         protected void ResultsGridView_SelectedIndexChanged(object sender, EventArgs e)

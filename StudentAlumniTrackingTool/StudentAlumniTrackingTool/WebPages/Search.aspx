@@ -244,7 +244,8 @@
                         </fieldset>
 
                         <asp:Button ID="SearchButton" runat="server" Text="Search" ValidationGroup="SearchUserValidationGroup"
-                        OnClientClick="OnSearchClick" PostBackUrl="SearchResults.aspx" />
+                        OnClientClick="OnSearchClick" PostBackUrl="SearchResults.aspx" 
+                            onclick="SearchButton_Click" />
                                  <span class = "failureNotification" >
                                      <asp:Literal ID = "EntryError" Visible="false" runat = "server"></asp:Literal>
                                  </span>
