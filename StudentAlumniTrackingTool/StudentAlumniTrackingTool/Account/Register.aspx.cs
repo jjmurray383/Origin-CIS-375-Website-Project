@@ -26,15 +26,19 @@ namespace StudentAlumniTrackingTool.Account
                 int year = System.DateTime.Now.Year;
                 year += 10; // Add for current students who don't graduate this year but in the next few coming years.
                 DropDownList GradYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("GradYearDropdown");
+
                 DropDownList EmployerStartYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerStartDateDDYear");
                 DropDownList EmployerEndYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerEndDateYear");
                 for (int i = 1900; i <= year; i++)
                 {
-                    ListItem yearItem = new ListItem(i.ToString(), i.ToString());
+                    ListItem yearItem = new ListItem(i.ToString(), i.ToString(), true);
+
                     GradYear.Items.Add(yearItem);
                     EmployerStartYear.Items.Add(yearItem);
                     EmployerEndYear.Items.Add(yearItem);
                 }
+                
+
             }
         }
 
@@ -186,7 +190,7 @@ namespace StudentAlumniTrackingTool.Account
                 if (insertQueryAddress != "INSERT INTO STUDENT_ADDRESS () VALUES ();")
                 {
                     sqlComm = new SqlCommand(insertQueryAddress, DBConn);
-
+                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
                     if (StreetBox.Text != null)
                         sqlComm.Parameters.Add("@Street", System.Data.SqlDbType.VarChar).Value = StreetBox.Text;
                     if (StateDropdown.Text != null)
@@ -222,7 +226,7 @@ namespace StudentAlumniTrackingTool.Account
                     }
                 }
 
-                insertQueryAddress += ") VALUES (";
+                insertQueryEducation += ") VALUES (";
                 for (int item = 0; item < EducationDatabaseColumns.Length; item++)
                 {
                     if (EducationDatabaseColumns[item] != "")
@@ -237,6 +241,7 @@ namespace StudentAlumniTrackingTool.Account
                 if (insertQueryEducation != "INSERT INTO EDUCATION () VALUES ();")
                 {
                     sqlComm = new SqlCommand(insertQueryEducation, DBConn);
+                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
                     if (UniversityTextBox.Text != null)
                         sqlComm.Parameters.Add("@School", System.Data.SqlDbType.VarChar).Value = UniversityTextBox.Text;
                     if (DegreeDropdown.Text != null)
@@ -305,6 +310,7 @@ namespace StudentAlumniTrackingTool.Account
                 if (insertQueryEmployment != "INSERT INTO EMPLOYMENT () VALUES ();")
                 {
                     sqlComm = new SqlCommand(insertQueryEmployment, DBConn);
+                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
                     if (EmployerBox.Text != null)
                         sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
                     if (EmployeeTitleBox.Text != null)
@@ -359,6 +365,7 @@ namespace StudentAlumniTrackingTool.Account
                 if (insertQueryEmployment != "INSERT INTO EMPLOYMENT () VALUES ();")
                 {
                     sqlComm = new SqlCommand(insertQueryEmployment, DBConn);
+                    sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = EmailTextBox.Text;
                     if (EmployerBox.Text != null)
                         sqlComm.Parameters.Add("@Employer", System.Data.SqlDbType.VarChar).Value = EmployerBox.Text;
                     if (EmployeeTitleBox.Text != null)
