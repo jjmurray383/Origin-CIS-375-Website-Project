@@ -23,23 +23,9 @@ namespace StudentAlumniTrackingTool.Account
 
             if (!IsPostBack)
             {
-                int year = System.DateTime.Now.Year;
-                year += 10; // Add for current students who don't graduate this year but in the next few coming years.
-                DropDownList GradYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("GradYearDropdown");
+                
 
-                DropDownList EmployerStartYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerStartDateDDYear");
-                DropDownList EmployerEndYear = (DropDownList)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("EmployerEndDateYear");
-                for (int i = 1900; i <= year; i++)
-                {
-                    ListItem yearItem = new ListItem(i.ToString(), i.ToString(), true);
 
-                    GradYear.Items.Add(yearItem);
-                    EmployerStartYear.Items.Add(yearItem);
-                    EmployerEndYear.Items.Add(yearItem);
-                }
-                GradYear.DataBind();
-                EmployerStartYear.DataBind();
-                EmployerEndYear.DataBind();
             }
         }
 
