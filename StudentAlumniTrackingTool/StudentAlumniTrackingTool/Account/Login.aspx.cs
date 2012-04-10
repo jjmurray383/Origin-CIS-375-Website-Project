@@ -29,9 +29,9 @@ namespace StudentAlumniTrackingTool.Account
 
             if (FindEmail == "admin")
             {
-                if (this.LoginUser.Password == "12345678") ;
+                if (this.LoginUser.Password == "12345678")
                 {
-                    ;
+                    User.IsInRole("admin");
                     //success
                 }
                 else
