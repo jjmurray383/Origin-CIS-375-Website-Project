@@ -9,38 +9,44 @@
                        Here are the result(s):
                         </p>
                         <asp:Panel ID="ResultsPanel" runat="server" Visible="False">
-                        
                             <asp:GridView ID = "ResultsGridView" runat = "server" 
                                 AutoGenerateColumns = "False" DataSourceID = "" 
-                                Width="100%" onselectedindexchanged="ResultsGridView_SelectedIndexChanged" >
+                                Width="100%" onselectedindexchanged="ResultsGridView_SelectedIndexChanged">
                                 <Columns>
-                                    <asp:BoundField DataField = "EmployerName" HeaderText = "Employer Name" SortExpression = "EmployerName" />
                                     <asp:BoundField DataField = "Lname" HeaderText = "Last Name" SortExpression = "LastName" />
-                                    <asp:BoundField DataField = "Major" HeaderText = "Major" SortExpression = "Major" />
-                                    <asp:BoundField DataField = "GraduationDate" HeaderText="Graduation Date" SortExpression="Graduation Date" />
-                                    <%--<asp:TemplateField HeaderText = "First Name">
-                                         <ItemTemplate>
+                                    <asp:BoundField DataField = "fname" HeaderText = "First Name" SortExpression = "FirstName" />
+                                    <asp:TemplateField HeaderText = "Email">
+                                        <ItemTemplate>
                                             <asp:LinkButton ID = "LinkName" runat = "server" 
-                                            Text='<%# Eval("Email") %>'> </asp:LinkButton>
-                                        </ItemTemplate> 
+                                            Text='<%# Eval("Email") %>'
+                                            PostBackUrl = '<%"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
+                                        </ItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:BoundField DataField = "SchoolName" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
-                                            <asp:LinkButton ID = "EditImageLink" runat = "server" >
+                                            <asp:LinkButton ID = "EditImageLink" runat = "server" 
+                                                PostBackUrl = '<%"~/WebPages/Edit.aspx?name="+Eval("Email") %>' >
                                                 <asp:Image AlternateText = "Edit" ImageUrl = "~/Images/pencil.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                         
-                                            <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px" Visible = "false">
+                                            <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID = "DeleteImageLink" runat = "server" >
+                                            <asp:LinkButton ID = "DeleteImageLink" runat = "server" 
+                                                PostBackUrl = '<%"~/WebPages/Delete.aspx?name="+Eval("Email") %>' >
                                                 <asp:Image ID = "DeleteImg" AlternateText = "Delete" ImageUrl = "~/Images/delete.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
-                                    </asp:TemplateField>--%>
+                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
+
+                            <asp:SqlDataSource ID = "SqlDataSource1" 
+                            runat = "server" 
+                            SelectCommand="">
+                                </asp:SqlDataSource>
                         </asp:Panel>
                         <asp:Panel ID = "ErrorPanel" runat="server">
                         </asp:Panel>

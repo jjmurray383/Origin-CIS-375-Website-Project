@@ -15,6 +15,7 @@ namespace StudentAlumniTrackingTool.WebPages
         {
             try
             {
+                /*
                 string queryString = (string)(Session["SearchQuery"]);
                 if (queryString == null)
                 {
@@ -103,14 +104,16 @@ namespace StudentAlumniTrackingTool.WebPages
                     case 0:
                         break;
                 }
+                sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = (string)Session["Email"];
                 //DBConn.Open();
                 sqlComm.Connection.Open();
+                */
+                SqlDataReader theReader = (SqlDataReader)Session["Reader"];
 
-                // SqlDataSource dataSource = (SqlDataSource) sqlComm.ExecuteReader();
-                ResultsGridView.DataSource = sqlComm.ExecuteReader();
+                ResultsGridView.DataSource = theReader;
                 ResultsGridView.DataBind();
-
-                // Close and dispose (hey, that rhymed!)
+                ResultsPanel.Visible = true;
+                
                 sqlComm.Dispose();
             }
             catch (Exception except)
