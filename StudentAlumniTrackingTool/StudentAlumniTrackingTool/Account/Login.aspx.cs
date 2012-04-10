@@ -31,7 +31,7 @@ namespace StudentAlumniTrackingTool.Account
             {
                 if (this.LoginUser.Password == "12345678")
                 {
-                    User.IsInRole("admin");
+                    User.IsInRole("admins");
                     //success
                 }
                 else
