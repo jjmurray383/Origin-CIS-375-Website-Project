@@ -19,7 +19,8 @@
                             <legend>Profile Information</legend>
                             <p>
                                 <asp:Label ID="FirstNameLabel" runat="server" AssociatedControlID="FirstNameBox">First Name:</asp:Label>
-                                <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" TextMode="SingleLine" MaxLength="20"></asp:TextBox>
+                                <asp:TextBox ID="FirstNameBox" runat="server" CssClass="textEntry" 
+                                    TextMode="SingleLine" MaxLength="20"></asp:TextBox>
                                 <asp:RequiredFieldValidator ControlToValidate="FirstNameBox" CssClass="failureNotification" Display="Dynamic" 
                                      ErrorMessage="You must enter a first name." ID="FirstNameRequired" runat="server" 
                                      ToolTip="You must enter a first name." ValidationGroup="EditUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -430,8 +431,8 @@
                                 </asp:DropDownList>
                             </p>
                              <p>
-                                <asp:Label ID="UnviersityEmailLabel" runat="server" AssociatedControlID="UnviersityEmailBox">School Email:</asp:Label>
-                                <asp:TextBox ID = "UnviersityEmailBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
+                                <asp:Label ID="UniversityEmailLabel" runat="server" AssociatedControlID="UniversityEmailBox">School Email:</asp:Label>
+                                <asp:TextBox ID = "UniversityEmailBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
                         <strong>Current Employer Info</strong>
                             <p>
@@ -799,10 +800,6 @@
                             <p>
                                 <asp:Label ID="EmployerHistoryTitleLabel" runat="server" AssociatedControlID="EmployerHistoryTitleBox">Title/Position:</asp:Label>
                                 <asp:TextBox ID = "EmployerHistoryTitleBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
-                            </p>
-                            <p>
-                                <asp:Label ID="EmployerHistoryEmailLabel" runat="server" AssociatedControlID="EmployerHistoryEmailBox">Email:</asp:Label>
-                                <asp:TextBox ID = "EmployerHistoryEmailBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
                         </fieldset>
                         <p class="submitButton">

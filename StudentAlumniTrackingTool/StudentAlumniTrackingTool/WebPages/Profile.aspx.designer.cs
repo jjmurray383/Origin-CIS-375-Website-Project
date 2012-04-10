@@ -337,22 +337,22 @@ namespace StudentAlumniTrackingTool.WebPages {
         protected global::System.Web.UI.WebControls.DropDownList GradYearDropdown;
         
         /// <summary>
-        /// UnviersityEmailLabel control.
+        /// UniversityEmailLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UnviersityEmailLabel;
+        protected global::System.Web.UI.WebControls.Label UniversityEmailLabel;
         
         /// <summary>
-        /// UnviersityEmailBox control.
+        /// UniversityEmailBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UnviersityEmailBox;
+        protected global::System.Web.UI.WebControls.TextBox UniversityEmailBox;
         
         /// <summary>
         /// EmployerLabel control.
@@ -551,24 +551,6 @@ namespace StudentAlumniTrackingTool.WebPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmployerHistoryTitleBox;
-        
-        /// <summary>
-        /// EmployerHistoryEmailLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmployerHistoryEmailLabel;
-        
-        /// <summary>
-        /// EmployerHistoryEmailBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EmployerHistoryEmailBox;
         
         /// <summary>
         /// EditUserButton control.

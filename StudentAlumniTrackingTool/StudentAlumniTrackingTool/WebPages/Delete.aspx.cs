@@ -14,8 +14,8 @@ namespace StudentAlumniTrackingTool.WebPages
         {
 
             // Assure user is admin
-            if (User.Identity.Name.Equals("admin") && (ClientQueryString != null) )
-                Console.Write("admin");
+            if (User.Identity.Name.Equals("admin") || User.Identity.Equals("admin2"))
+                Console.Write("administrator");
             else
                 Response.Redirect("Error.aspx");
         }
