@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace StudentAlumniTrackingTool.WebPages
 {
@@ -33,6 +34,7 @@ namespace StudentAlumniTrackingTool.WebPages
             TextBox EmployerBox = this.EmployerBox;
             DateTime dt;
             bool Successful = false;
+            SqlConnection DBConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
             // Query the DB
             SqlCommand sqlComm = new SqlCommand();
 
@@ -42,7 +44,7 @@ namespace StudentAlumniTrackingTool.WebPages
             {
                 // Start SQL command here for parameterization 
                 sqlComm = new SqlCommand(
-                    "SELECT STUDENT.Fname, STUDENT.Lname, EDUCATION.SchoolName FROM STUDENT, EDUCATION ");
+                    "SELECT STUDENT.Fname, STUDENT.Lname, EDUCATION.SchoolName, STUDENT.Email FROM STUDENT, EDUCATION ");
 
                 string currentText;
                 if (!((currentText = EmployerBox.Text).Equals("")))
@@ -110,10 +112,14 @@ namespace StudentAlumniTrackingTool.WebPages
                 {
                     sqlComm.CommandText += " AND STUDENT.Email = EDUCATION.Email);";
                     string sqlQuery = sqlComm.CommandText;
+                    sqlComm.Connection = DBConn;
+                    DBConn.Open();
+                    Session["Reader"] = sqlComm.ExecuteReader();
                     // Generate search query here as a session variable - will be passed to results page
                     Session["SearchQuery"] = sqlQuery;
                     Session["Identifier"] = identifier;
                     Successful = true;
+                    
                 }
 
             }

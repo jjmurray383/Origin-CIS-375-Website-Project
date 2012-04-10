@@ -27,6 +27,18 @@ namespace StudentAlumniTrackingTool.Account
             SqlCommand DBCmd = new SqlCommand();
             SqlDataReader myReader = null;
 
+            if (FindEmail == "admin")
+            {
+                if (this.LoginUser.Password == "12345678") ;
+                {
+                    ;
+                    //success
+                }
+                else
+                ;
+                //fail
+            }
+
             try
             {
                 DBConn.Open();

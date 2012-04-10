@@ -15,6 +15,7 @@ namespace StudentAlumniTrackingTool.WebPages
         {
             try
             {
+                /*
                 string queryString = (string)(Session["SearchQuery"]);
                 int identifier = (int)Session["Identifier"];
                 string connectDBstring = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
@@ -92,11 +93,16 @@ namespace StudentAlumniTrackingTool.WebPages
                     case 0:
                         break;
                 }
+                sqlComm.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = (string)Session["Email"];
                 //DBConn.Open();
                 sqlComm.Connection.Open();
+                */
+                SqlDataReader theReader = (SqlDataReader)Session["Reader"];
 
-                ResultsGridView.DataSource = sqlComm.ExecuteReader();
+                ResultsGridView.DataSource = theReader;
                 ResultsGridView.DataBind();
+                ResultsPanel.Visible = true;
+                
             }
             catch (Exception except)
             {

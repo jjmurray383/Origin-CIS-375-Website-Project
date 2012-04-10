@@ -14,14 +14,15 @@
                                 Width="100%" onselectedindexchanged="ResultsGridView_SelectedIndexChanged">
                                 <Columns>
                                     <asp:BoundField DataField = "Lname" HeaderText = "Last Name" SortExpression = "LastName" />
-                                    <asp:TemplateField HeaderText = "First Name">
+                                    <asp:BoundField DataField = "fname" HeaderText = "First Name" SortExpression = "FirstName" />
+                                    <asp:TemplateField HeaderText = "Email">
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "LinkName" runat = "server" 
                                             Text='<%# Eval("Email") %>'
                                             PostBackUrl = '<%"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField = "Major" HeaderText = "Education" SortExpression = "Education" />
+                                    <asp:BoundField DataField = "SchoolName" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "EditImageLink" runat = "server" 
