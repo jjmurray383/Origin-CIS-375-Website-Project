@@ -57,8 +57,8 @@
                                 <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Add"/>
                                 <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Search"/>
-                                <asp:MenuItem NavigateUrl="~/WebPages/Edit.aspx" Text="Edit" />
-                                <asp:MenuItem NavigateUrl="~/WebPages/Delete.aspx" Text="Delete" />
+                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Edit" />
+                                <asp:MenuItem NavigateUrl="~/WebPages/Search.aspx" Text="Delete" />
                                 <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                                 <asp:MenuItem NavigateUrl="~/Account/Logout.aspx" Text="Logout"/>
                             </Items>

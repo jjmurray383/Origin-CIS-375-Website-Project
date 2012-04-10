@@ -27,8 +27,11 @@ namespace StudentAlumniTrackingTool.WebPages
             SqlConnection sqlCon = new SqlConnection();
             string clientQueryStr = ClientQueryString;
 
+            // Run the query from here
             sqlComm = new SqlCommand("");
-            // Delete user
+            // sqlComm.doStuff();
+
+            // Redirect to success page. Great success.
             Response.Redirect("Success.aspx");
         }
 
