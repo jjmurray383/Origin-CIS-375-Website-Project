@@ -847,10 +847,6 @@
                                 <asp:Label ID="EmployerHistoryTitleLabel" runat="server" AssociatedControlID="EmployerHistoryTitleBox">Title/Position:</asp:Label>
                                 <asp:TextBox ID = "EmployerHistoryTitleBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
                             </p>
-                            <p>
-                                <asp:Label ID="EmployerHistoryEmailLabel" runat="server" AssociatedControlID="EmployerHistoryEmailBox">Email:</asp:Label>
-                                <asp:TextBox ID = "EmployerHistoryEmailBox" runat="server" CssClass = "textEntry" TextMode="SingleLine"></asp:TextBox>
-                            </p>
                         </fieldset>
                         <p class="submitButton">
                             <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 

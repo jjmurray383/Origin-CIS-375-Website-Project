@@ -15,8 +15,9 @@ namespace StudentAlumniTrackingTool
             // Code that runs on application startup
             
                 Roles.CreateRole("users");
-                Roles.CreateRole("admins");
+                Roles.CreateRole("admins");     // Hard code two admin users
                 Roles.AddUserToRole("admin", "admins");
+                Roles.AddUserToRole("admin2", "admins");
             
         }
 
