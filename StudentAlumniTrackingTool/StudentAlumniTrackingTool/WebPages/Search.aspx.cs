@@ -61,6 +61,7 @@ namespace StudentAlumniTrackingTool.WebPages
                     else
                         sqlComm.CommandText += " AND Lname LIKE @Lname";
                     sqlComm.Parameters.Add("@Lname", System.Data.SqlDbType.VarChar).Value = "%" + currentText + "%";
+                    sqlComm.Parameters["@Lname"].Value = currentText;
                     Session["Lname"] = "%" + currentText + "%";
                     identifier = identifier + 2;
                 }
