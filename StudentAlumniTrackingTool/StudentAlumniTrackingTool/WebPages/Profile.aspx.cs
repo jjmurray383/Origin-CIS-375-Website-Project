@@ -17,9 +17,12 @@ namespace StudentAlumniTrackingTool.WebPages
             // Get user info from SQL
             // Query the DB
             string connectionString = "";
-            string queryStr;
+            string queryStr = Request.QueryString.ToString();
             SqlConnection sqlCon = new SqlConnection();
             SqlCommand sqlComm = new SqlCommand();
+
+            // Parse query string
+
 
 
             // Assure user is themselves or is admin

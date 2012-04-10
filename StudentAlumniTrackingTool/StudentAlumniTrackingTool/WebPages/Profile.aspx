@@ -7,7 +7,7 @@
                         Viewing Profile
                     </h2>
                     <p>
-                        If you are this user and you want to edit, use this form to edit your information.
+                        Here is the requested profile information.
                     </p>
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
@@ -619,7 +619,7 @@
                                     <asp:ListItem Value="2009">2009</asp:ListItem>
                                     <asp:ListItem Value="2010">2010</asp:ListItem>
                                     <asp:ListItem Value="2011">2011</asp:ListItem>
-                                    <asp:ListItem Value="2012">2012</asp:ListItem
+                                    <asp:ListItem Value="2012">2012</asp:ListItem>
                                 </asp:DropDownList>
                             </p>
                             <p>

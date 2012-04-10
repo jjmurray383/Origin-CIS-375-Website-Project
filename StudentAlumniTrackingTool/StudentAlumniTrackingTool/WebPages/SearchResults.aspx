@@ -19,14 +19,14 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "LinkName" runat = "server" 
                                             Text='<%# Eval("Email") %>'
-                                            PostBackUrl = '<%"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
+                                            PostBackUrl = '<%#"~/WebPages/Profile.aspx?name="+Eval("Email") %>'> </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField = "SchoolName" HeaderText = "Education" SortExpression = "Education" />
                                     <asp:TemplateField HeaderText="Edit" ControlStyle-Width = "25px" >
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "EditImageLink" runat = "server" 
-                                                PostBackUrl = '<%"~/WebPages/Edit.aspx?name="+Eval("Email") %>' >
+                                                PostBackUrl = '<%#"~/WebPages/Profile.aspx?name="+Eval("Email") %>' >
                                                 <asp:Image AlternateText = "Edit" ImageUrl = "~/Images/pencil.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -35,7 +35,7 @@
                                             <asp:TemplateField HeaderText="Delete" ControlStyle-Width="25px">
                                         <ItemTemplate>
                                             <asp:LinkButton ID = "DeleteImageLink" runat = "server" 
-                                                PostBackUrl = '<%"~/WebPages/Delete.aspx?name="+Eval("Email") %>' >
+                                                PostBackUrl = '<%#"~/WebPages/Delete.aspx?name="+Eval("Email") %>' >
                                                 <asp:Image ID = "DeleteImg" AlternateText = "Delete" ImageUrl = "~/Images/delete.gif" runat = "server" />
                                             </asp:LinkButton>
                                         </ItemTemplate>
