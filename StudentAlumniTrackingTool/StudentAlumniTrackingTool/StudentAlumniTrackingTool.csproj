@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Account\LoginError.aspx" />
     <Content Include="Account\RegisterError.aspx" />
     <Content Include="Account\Success.aspx" />
     <Content Include="Account\Logout.aspx" />
@@ -78,9 +79,8 @@
     <Content Include="WebPages\DeleteAll.aspx" />
     <Content Include="WebPages\Delete.aspx" />
     <Content Include="WebPages\Error.aspx" />
-    <Content Include="WebPages\Edit.aspx" />
-    <Content Include="WebPages\SearchResults.aspx" />
     <Content Include="WebPages\Profile.aspx" />
+    <Content Include="WebPages\SearchResults.aspx" />
     <Content Include="WebPages\Search.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +90,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\LoginError.aspx.cs">
+      <DependentUpon>LoginError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\LoginError.aspx.designer.cs">
+      <DependentUpon>LoginError.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\RegisterError.aspx.cs">
       <DependentUpon>RegisterError.aspx</DependentUpon>
@@ -172,12 +179,12 @@
     <Compile Include="WebPages\Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebPages\Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
+    <Compile Include="WebPages\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebPages\Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
+    <Compile Include="WebPages\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebPages\SearchResults.aspx.cs">
       <DependentUpon>SearchResults.aspx</DependentUpon>
@@ -185,13 +192,6 @@
     </Compile>
     <Compile Include="WebPages\SearchResults.aspx.designer.cs">
       <DependentUpon>SearchResults.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebPages\Profile.aspx.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\Profile.aspx.designer.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebPages\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

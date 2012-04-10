@@ -7,6 +7,7 @@
 <p>
     There has been an error. It most likely means you were not allowed to do something you were trying to do.
 </p>
+<asp:Label CssClass="failureNotification" runat="server" ID = "ErrorSource"></asp:Label>
 <p>
 <a href="../Default.aspx">Return home</a>
 </p>
